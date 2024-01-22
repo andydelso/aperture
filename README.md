@@ -1,8 +1,8 @@
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
 ## Local Project Setup:
-- Follow instructions [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html) when using Android Studio IDE
-- Follow instructions [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html) when using Jetbrains Fleet IDE
+- For Android Studio see [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)
+- For Jetbrains Fleet see [here](https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html)
 
 **Be sure to open both Android Studio (including an emulator) and XCode (including a simulator) at least once before opening this project in the newer Fleet IDE. If the iOS build does not work in Fleet, close it, and try to open the iosApp.xcodeproj within XCode. Build it successfully, and then try Fleet again.**
 
