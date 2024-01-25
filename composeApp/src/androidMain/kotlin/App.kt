@@ -25,18 +25,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ddaypunk.aperture.R
 import com.ddaypunk.aperture.mockData
 import data.Award
 import data.Season
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
-
 @Composable
 fun App() {
     MaterialTheme {
@@ -155,12 +155,12 @@ fun AwardCard(
                 ) {
                     if (showNominations) {
                         Image(
-                            painter = painterResource("ic_expand_less_24.xml"),
+                            painter = painterResource(R.drawable.ic_expand_less_24),
                             contentDescription = "${accessibility.seasonYear} ${state.award.category} show less"
                         )
                     } else {
                         Image(
-                            painter = painterResource("ic_expand_more_24.xml"),
+                            painter = painterResource(R.drawable.ic_expand_more_24),
                             contentDescription = "${accessibility.seasonYear} ${state.award.category} show more"
                         )
                     }
@@ -222,7 +222,7 @@ fun Nominee(
         if (state.isWinner) {
             Image(
                 modifier = Modifier.padding(end = 16.dp),
-                painter = painterResource("ic_trophy_24.xml"),
+                painter = painterResource(R.drawable.ic_trophy_24),
                 contentDescription = "category winner",
                 colorFilter = ColorFilter.tint(Color.DarkGray)
             )
