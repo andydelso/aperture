@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ddaypunk.aperture.R
 import com.ddaypunk.aperture.mockData
-import data.Award
-import data.Season
+import com.ddaypunk.aperture.data.Award
+import com.ddaypunk.aperture.data.Season
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Composable
 fun App() {

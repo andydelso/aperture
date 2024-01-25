@@ -1,8 +1,8 @@
 package com.ddaypunk.aperture
 
-import data.Award
-import data.Nominee
-import data.Season
+import com.ddaypunk.aperture.data.Award
+import com.ddaypunk.aperture.data.Nominee
+import com.ddaypunk.aperture.data.Season
 
 val mockData = listOf(
     Season(

@@ -1,4 +1,4 @@
-package data
+package com.ddaypunk.aperture.data
 
 data class Award(
     val id: Int? = null,
