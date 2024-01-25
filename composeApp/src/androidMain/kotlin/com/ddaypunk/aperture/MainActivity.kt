@@ -1,6 +1,7 @@
 package com.ddaypunk.aperture
 
 import App
+import MainScreenState
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
