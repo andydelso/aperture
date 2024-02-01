@@ -10,10 +10,7 @@ expect class DriverFactory {
 }
 
 fun createDatabase(driverFactory: DriverFactory): ApertureDatabase {
-    val driver = driverFactory.createDriver()
-    val database = ApertureDatabase(driver)
-
-    // other DB work here
-
-    return database
+    return ApertureDatabase(
+        driverFactory.createDriver()
+    )
 }

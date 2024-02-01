@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,9 +15,9 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.IconToggleButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,31 +33,38 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ddaypunk.aperture.MainScreenState
+import com.ddaypunk.aperture.MainScreenViewModel
 import com.ddaypunk.aperture.R
-import com.ddaypunk.aperture.mockData
 import com.ddaypunk.aperture.data.Award
-import com.ddaypunk.aperture.data.Season
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+
 @Composable
-fun App() {
-    MaterialTheme {
-        MainScreen(
-            state = MainScreenState(
-                seasons = mockData
-            )
-        )
+fun MainScreen(
+    viewModel: MainScreenViewModel
+) {
+    val state = viewModel.uiState.collectAsState()
+
+    when(state.value) {
+        is MainScreenState.Ready -> MainScreenReady(state.value as MainScreenState.Ready)
+        is MainScreenState.Loading -> MainScreenLoading()
     }
 }
 
-data class MainScreenState(
-    val seasons: List<Season>
-)
+@Composable
+fun MainScreenLoading() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Loading...")
+    }
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun MainScreen(
-    state: MainScreenState
-) {
+fun MainScreenReady(state: MainScreenState.Ready) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -64,30 +72,34 @@ private fun MainScreen(
         verticalArrangement = Arrangement
             .spacedBy(8.dp)
     ) {
-        state.seasons.forEach { season: Season ->
-            stickyHeader {
-                SeasonHeader(
-                    state = SeasonHeaderState(
-                        title = season.year
-                    )
-                )
-            }
-            items(season.awards) { award: Award ->
-                AwardCard(
-                    state = AwardCardState(
-                        award = award
-                    ),
-                    accessibility = AwardCardAccessibilityState(
-                        seasonYear = season.year
-                    )
-                )
+        with(state.uiState) {
+            seasons?.let { nonNullSeasons ->
+                nonNullSeasons.forEach { season ->
+                    stickyHeader {
+                        SeasonHeader(
+                            state = SeasonHeaderState(
+                                title = "${season.year} (Mock)"
+                            )
+                        )
+                    }
+                    items(season.awards) { award: Award ->
+                        AwardCard(
+                            state = AwardCardState(
+                                award = award
+                            ),
+                            accessibility = AwardCardAccessibilityState(
+                                seasonYear = season.year
+                            )
+                        )
+                    }
+                }
             }
         }
     }
 }
 
 data class SeasonHeaderState(
-    val title: Int
+    val title: String
 )
 
 @Composable
@@ -122,7 +134,6 @@ data class AwardCardAccessibilityState(
     val seasonYear: Int
 )
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AwardCard(
     state: AwardCardState,
@@ -224,7 +235,7 @@ fun Nominee(
                 modifier = Modifier.padding(end = 16.dp),
                 painter = painterResource(R.drawable.ic_trophy_24),
                 contentDescription = "category winner",
-                colorFilter = ColorFilter.tint(Color.DarkGray)
+                colorFilter = ColorFilter.tint(Color.Yellow)
             )
         }
     }
