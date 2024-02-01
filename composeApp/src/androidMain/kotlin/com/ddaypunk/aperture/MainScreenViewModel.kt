@@ -18,14 +18,13 @@ class MainScreenViewModel(
     private val _uiState = MutableStateFlow<MainScreenState>(MainScreenState.Loading)
     val uiState: StateFlow<MainScreenState> = _uiState.asStateFlow()
 
-    private lateinit var categories: List<String>
-
     init {
         viewModelScope.launch {
             // Todo: just getting the one and only category for now, to test the waters
             val element = apertureDatabase.categoriesQueries.selectAll().executeAsList()[0].name
             // emit the state to the UI
             _uiState.update {
+                // TODO: remove mocks
                 MainScreenState.Ready(
                     uiState = MainScreenUiState(
                         seasons = listOf(

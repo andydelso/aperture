@@ -115,7 +115,7 @@ fun SeasonHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp),
-            text = state.title.toString(),
+            text = state.title,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
