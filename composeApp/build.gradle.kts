@@ -66,7 +66,6 @@ android {
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
-        implementation(libs.kotlin.inject.runtime)
     }
 }
 
