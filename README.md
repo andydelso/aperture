@@ -24,3 +24,6 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 ## Dependencies used
 * [sqldelight](https://cashapp.github.io/sqldelight/2.0.1/multiplatform_sqlite/) - for storing and loading the nominee data
+
+## Helpful Resources
+* [Resources List](/RESOURCES.md)
