@@ -2,6 +2,8 @@
 [github/todometer-kmp](https://github.com/serbelga/Todometer-KMP/tree/main) - A completed OSS app using KMP and sqldelight - LARGE mutli module feel and a bit confusing right now
 
 ## KMP Tools
+[KMP Compatibility Guide](https://kotlinlang.org/docs/multiplatform-compatibility-guide.html)
+[KMM plugin releases](https://kotlinlang.org/docs/multiplatform-plugin-releases.html#release-details)
 [github/KMM-ViewModel](https://github.com/rickclephas/KMM-ViewModel) - need to see if this is useful to have a single view model for all platforms instead of building our own
 [github/kmp-awesome](https://github.com/terrakok/kmp-awesome) A nice list of useful KMP tools
 
