@@ -12,9 +12,10 @@ data class Nominee(
 
 enum class NomineeType {
     FILM,
-    SHORT,
-    DOCUMENTARY,
-    ACTOR,
-    DIRECTOR,
-    EDITOR
+    PERSONNEL
+}
+
+enum class NomineePosition {
+    PRIMARY,
+    SECONDARY
 }
