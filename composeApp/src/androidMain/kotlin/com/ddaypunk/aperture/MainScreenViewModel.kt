@@ -6,6 +6,7 @@ import com.ddaypunk.aperture.data.Award
 import com.ddaypunk.aperture.data.Nominee
 import com.ddaypunk.aperture.data.Season
 import com.ddaypunk.aperture.db.ApertureDatabase
+import com.ddaypunk.aperture.db.SelectAllAwardNominees
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,81 +21,19 @@ class MainScreenViewModel(
 
     init {
         viewModelScope.launch {
-            // Todo: just getting the one and only category for now, to test the waters
-            val element = apertureDatabase.categoriesQueries.selectAll().executeAsList()[0].name
+            val data = apertureDatabase.awardNomineeQueries.selectAllAwardNominees().executeAsList()
+            val state = mapDataToState(data)
             // emit the state to the UI
             _uiState.update {
-                // TODO: remove mocks
-                MainScreenState.Ready(
-                    uiState = MainScreenUiState(
-                        seasons = listOf(
-                            Season(
-                                year = 2022,
-                                awards = listOf(
-                                    Award(
-                                        id = null,
-                                        category = element,
-                                        nominations = listOf(
-                                            Nominee(
-                                                id = null,
-                                                name = "CODA (Mock)",
-                                                won = true
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Belfast (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Don't Look Up (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Drive My Car (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Dune (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "King Richard (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Licorice Pizza (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "Nightmare Alley (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "The Power of the Dog (Mock)",
-                                                won = false
-                                            ),
-                                            Nominee(
-                                                id = null,
-                                                name = "West Side Story (Mock)",
-                                                won = false
-                                            ),
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
+                MainScreenState.Ready(uiState = state)
             }
         }
     }
+
+    private fun mapDataToState(data: List<SelectAllAwardNominees>) =
+        MainScreenUiState(
+            seasons = data.toListOfSeasons()
+        )
 }
 
 sealed class MainScreenState {
@@ -105,3 +44,27 @@ sealed class MainScreenState {
 data class MainScreenUiState(
     val seasons: List<Season>? = emptyList()
 )
+
+fun List<SelectAllAwardNominees>.toListOfSeasons(): List<Season> {
+    return this
+        .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
+        .mapNotNull { year ->
+            Season(
+                year = year.key.toInt(),
+                awards = year.value.groupBy { it.categoryName }
+                    .mapNotNull { category ->
+                        Award(
+                            category = category.key,
+                            nominations = category.value.map { nominee ->
+                                Nominee(
+                                    name = nominee.name,
+                                    secondary = nominee.secondaryInfo.split(","),
+                                    won = nominee.won,
+                                    note = nominee.notes
+                                )
+                            }
+                        )
+                    }
+            )
+        }
+}

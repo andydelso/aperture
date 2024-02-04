@@ -78,7 +78,7 @@ fun MainScreenReady(state: MainScreenState.Ready) {
                     stickyHeader {
                         SeasonHeader(
                             state = SeasonHeaderState(
-                                title = "${season.year} (Mock)"
+                                title = "${season.year}"
                             )
                         )
                     }
