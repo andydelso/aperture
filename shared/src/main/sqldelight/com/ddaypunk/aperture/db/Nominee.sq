@@ -1,0 +1,17 @@
+CREATE TABLE nominee (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  type TEXT,
+  secondaryInfo TEXT NOT NULL
+);
+
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("American Fiction", "FILM","Ben LeClair,Nikos Karamigios,Cord Jefferson,Jermaine Johnson"); -- 1
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Anatomy of a Fall", "FILM", "Marie-Ange Luciani,David Thion"); -- 2
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Barbie", "FILM", "David Heyman,Margot Robbie,Tom Ackerley,Robbie Brenner"); -- 3
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Killers of the Flower Moon", "FILM", "Dan Friedkin,Bradley Thomas,Martin Scorsese,Daniel Lupi"); -- 4
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Maestro", "FILM", "Bradley Cooper,Steven Spielberg,Fred Berner,Amy Durning,Kristie Macosko Krieger"); -- 5
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Oppenheimer", "FILM", "Emma Thomas,Charles Roven,Christopher Nolan"); -- 6
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Past Lives", "FILM", "David Hinojosa,Christine Vachon,Pamela Koffler"); -- 7
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Poor Things", "FILM", "Ed Guine,Andrew Lowe,Yorgos Lanthimos,Emma Stone"); -- 8
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Holdovers", "FILM", "Mark Johnson"); -- 9
+INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Zone of Interest", "FILM", "James Wilson"); -- 10

@@ -1,0 +1,6 @@
+CREATE TABLE category (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL
+);
+
+INSERT INTO category (name) VALUES ("Best Motion Picture of the Year");

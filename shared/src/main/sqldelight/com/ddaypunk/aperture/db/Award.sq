@@ -1,0 +1,8 @@
+CREATE TABLE award (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  categoryId INTEGER REFERENCES category(id),
+  yearId INTEGER REFERENCES year(id)
+);
+
+-- 1 - Best Picture - 2024
+INSERT INTO award (categoryId, yearId) VALUES (1, 1);

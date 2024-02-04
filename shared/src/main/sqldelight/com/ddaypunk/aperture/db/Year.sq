@@ -1,0 +1,6 @@
+CREATE TABLE year (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    year integer NOT NULL
+);
+
+INSERT INTO year (year) VALUES (2024);
