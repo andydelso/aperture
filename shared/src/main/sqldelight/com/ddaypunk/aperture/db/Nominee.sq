@@ -1,7 +1,10 @@
+import kotlin.Boolean;
+
 CREATE TABLE nominee (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   type TEXT,
+  watched INTEGER AS Boolean DEFAULT 0 NOT NULL, -- we want this to show for multiple categories if needed
   secondaryInfo TEXT NOT NULL
 );
 
@@ -15,3 +18,8 @@ INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Past Lives", "FILM", "D
 INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Poor Things", "FILM", "Ed Guine,Andrew Lowe,Yorgos Lanthimos,Emma Stone"); -- 8
 INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Holdovers", "FILM", "Mark Johnson"); -- 9
 INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Zone of Interest", "FILM", "James Wilson"); -- 10
+
+updateNomineeWatched:
+UPDATE nominee
+SET watched = ? -- Set to 1 for true or 0 for false
+WHERE id = ?;

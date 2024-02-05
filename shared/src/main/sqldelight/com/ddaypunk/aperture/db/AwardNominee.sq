@@ -20,7 +20,7 @@ INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 9);
 INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 10);
 
 selectAllAwardNominees:
-SELECT category.name AS categoryName, year.year AS awardYear, nominee.name, nominee.type, nominee.secondaryInfo, won, notes
+SELECT category.name AS categoryName, year.year AS awardYear, nominee.id, nominee.name, nominee.type, nominee.secondaryInfo, nominee.watched, won, notes
 FROM nominee
 JOIN awardNominee ON nominee.id = awardNominee.nomineeId
 JOIN award ON awardNominee.awardId = award.id
