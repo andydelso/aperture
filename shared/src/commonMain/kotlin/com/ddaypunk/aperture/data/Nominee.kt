@@ -1,7 +1,7 @@
 package com.ddaypunk.aperture.data
 
 data class Nominee(
-    val id: Int? = null,
+    val id: Long,
     val name: String,
     val secondary: List<String>? = null,
     val won: Boolean = false,

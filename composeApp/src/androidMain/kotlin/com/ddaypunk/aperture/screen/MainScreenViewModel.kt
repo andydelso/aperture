@@ -1,10 +1,9 @@
-package com.ddaypunk.aperture
+package com.ddaypunk.aperture.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ddaypunk.aperture.data.Award
-import com.ddaypunk.aperture.data.Nominee
-import com.ddaypunk.aperture.data.Season
+import com.ddaypunk.aperture.component.CheckableRowState
+import com.ddaypunk.aperture.component.ExpandableCardState
 import com.ddaypunk.aperture.db.ApertureDatabase
 import com.ddaypunk.aperture.db.SelectAllAwardNominees
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,9 +29,13 @@ class MainScreenViewModel(
         }
     }
 
+    fun toggleCheckboxState(id: Long, state: Boolean) {
+
+    }
+
     private fun mapDataToState(data: List<SelectAllAwardNominees>) =
         MainScreenUiState(
-            seasons = data.toListOfSeasons()
+            seasons = data.toListOfSeasonEntryStates()
         )
 }
 
@@ -42,25 +45,31 @@ sealed class MainScreenState {
 }
 
 data class MainScreenUiState(
-    val seasons: List<Season>? = emptyList()
+    val seasons: List<SeasonEntryState>? = emptyList()
 )
 
-fun List<SelectAllAwardNominees>.toListOfSeasons(): List<Season> {
+data class SeasonEntryState(
+    val title: String,
+    val categoryStates: List<ExpandableCardState>
+)
+
+fun List<SelectAllAwardNominees>.toListOfSeasonEntryStates(): List<SeasonEntryState> {
     return this
         .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
         .mapNotNull { year ->
-            Season(
-                year = year.key.toInt(),
-                awards = year.value.groupBy { it.categoryName }
+            SeasonEntryState(
+                title = year.key.toString(),
+                categoryStates = year.value.groupBy { it.categoryName }
                     .mapNotNull { category ->
-                        Award(
-                            category = category.key,
-                            nominations = category.value.map { nominee ->
-                                Nominee(
-                                    name = nominee.name,
-                                    secondary = nominee.secondaryInfo.split(","),
-                                    won = nominee.won,
-                                    note = nominee.notes
+                        ExpandableCardState(
+                            title = category.key,
+                            nomineeStates = category.value.map { nominee ->
+                                CheckableRowState(
+                                    rowId = nominee.id,
+                                    title = nominee.name,
+//                                    secondary = nominee.secondaryInfo.split(","),
+                                    endIconIsDisplayed = nominee.won,
+//                                    note = nominee.notes
                                 )
                             }
                         )
