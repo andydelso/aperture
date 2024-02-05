@@ -2,6 +2,7 @@ package com.ddaypunk.aperture.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ddaypunk.aperture.R
 import com.ddaypunk.aperture.component.CheckableRowState
 import com.ddaypunk.aperture.component.ExpandableCardState
 import com.ddaypunk.aperture.db.ApertureDatabase
@@ -67,8 +68,8 @@ fun List<SelectAllAwardNominees>.toListOfSeasonEntryStates(): List<SeasonEntrySt
                                 CheckableRowState(
                                     rowId = nominee.id,
                                     title = nominee.name,
+                                    endIcon = if (nominee.won) R.drawable.ic_trophy_24 else null
 //                                    secondary = nominee.secondaryInfo.split(","),
-                                    endIconIsDisplayed = nominee.won,
 //                                    note = nominee.notes
                                 )
                             }

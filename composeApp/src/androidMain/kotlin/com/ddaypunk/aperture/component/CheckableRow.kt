@@ -1,5 +1,7 @@
 package com.ddaypunk.aperture.component
 
+import android.graphics.drawable.Icon
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -54,10 +56,10 @@ fun CheckableRow(
             modifier = Modifier.weight(1f),
             text = state.title, fontSize = 18.sp
         )
-        if (state.endIconIsDisplayed) {
+        state.endIcon?.let { nonNullEndIcon ->
             Image(
                 modifier = Modifier.padding(end = 16.dp),
-                painter = painterResource(R.drawable.ic_trophy_24),
+                painter = painterResource(nonNullEndIcon),
                 contentDescription = "category winner",
                 colorFilter = ColorFilter.tint(Color.Yellow)
             )
@@ -68,5 +70,5 @@ fun CheckableRow(
 data class CheckableRowState(
     val rowId: Long,
     val title: String,
-    val endIconIsDisplayed: Boolean
+    @DrawableRes val endIcon: Int? = null,
 )
