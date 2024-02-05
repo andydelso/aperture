@@ -83,7 +83,7 @@ fun ExpandableCard(
                             state = CheckableRowState(
                                 rowId = nominee.rowId,
                                 title = nominee.title,
-                                endIconIsDisplayed = nominee.endIconIsDisplayed,
+                                endIcon = nominee.endIcon
 //                                note = nominee.note,
 //                                secondary = nominee.secondary
                             )
