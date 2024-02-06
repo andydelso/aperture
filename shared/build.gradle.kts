@@ -15,10 +15,10 @@ kotlin {
         }
     }
 
-//    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-//    compilerOptions {
-//        freeCompilerArgs.add("-Xexpect-actual-classes")
-//    }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
 
     listOf(
         iosX64(),
@@ -59,7 +59,6 @@ sqldelight {
     databases {
         create("ApertureDatabase") {
             packageName.set("com.ddaypunk.aperture.db")
-            srcDirs.setFrom("src/main/sqldelight")
         }
     }
 }
