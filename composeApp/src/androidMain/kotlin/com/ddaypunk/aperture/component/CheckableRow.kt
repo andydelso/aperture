@@ -1,6 +1,5 @@
 package com.ddaypunk.aperture.component
 
-import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -19,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ddaypunk.aperture.R
 
 /**
  * A component to display a row of data with a checkbox and a possible end of row icon

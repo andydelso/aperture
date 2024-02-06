@@ -31,7 +31,7 @@ class MainScreenViewModel(
     }
 
     fun toggleCheckboxState(id: Long, state: Boolean) {
-
+        // implement me
     }
 
     private fun mapDataToState(data: List<SelectAllAwardNominees>) =
