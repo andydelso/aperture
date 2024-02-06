@@ -27,7 +27,8 @@ kotlin {
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "Shared"
-            isStatic = true
+            // For some reason, this is breaking iOS builds, so leave out for now
+//            isStatic = true
         }
     }
     
