@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqldelight)
-    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -16,10 +15,10 @@ kotlin {
         }
     }
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        freeCompilerArgs.add("-Xexpect-actual-classes")
-    }
+//    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+//    compilerOptions {
+//        freeCompilerArgs.add("-Xexpect-actual-classes")
+//    }
 
     listOf(
         iosX64(),
