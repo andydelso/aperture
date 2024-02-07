@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ddaypunk.aperture.component.CheckableRowState
 import com.ddaypunk.aperture.component.ExpandableCard
 import com.ddaypunk.aperture.component.ExpandableCardAccessibilityState
 import com.ddaypunk.aperture.component.ExpandableCardState
@@ -77,5 +80,42 @@ fun MainScreenReady(state: MainScreenState.Ready) {
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun MainScreenReadyPreview() {
+    MaterialTheme {
+        MainScreenReady(
+            state = MainScreenState.Ready(
+                uiState = MainScreenUiState(
+                    seasons = listOf(
+                        SeasonEntryState(
+                            title = "2024",
+                            categoryStates = listOf(
+                                ExpandableCardState(
+                                    title = "Best Previews Ever",
+                                    nomineeStates = listOf(
+                                        CheckableRowState(
+                                            rowId = 1,
+                                            title = "Star Wars: The Force Awakens"
+                                        ),
+                                        CheckableRowState(
+                                            rowId = 2,
+                                            title = "Harry Potter and the Order of the Phoenix"
+                                        ),
+                                        CheckableRowState(
+                                            rowId = 3,
+                                            title = "Space Balls II: The Search for More Money"
+                                        ),
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
     }
 }

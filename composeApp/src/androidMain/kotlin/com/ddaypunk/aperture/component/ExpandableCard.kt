@@ -35,6 +35,7 @@ fun ExpandableCard(
     state: ExpandableCardState,
     accessibilityState: ExpandableCardAccessibilityState,
 ) {
+    // TODO: move this into the VM with actions
     var showNominations by remember { mutableStateOf(false) }
     Card {
         Column {
