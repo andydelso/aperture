@@ -16,6 +16,7 @@ compose-viewmodel = "2.6.1"
 compose-compiler = "1.5.8"
 compose-plugin = "1.5.11"
 junit = "4.13.2"
+koin = "3.2.0"
 kotlin = "1.9.21"
 ksp = "1.9.21-1.0.15"
 sqldelight = "2.0.1"
@@ -38,6 +39,9 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 sqldelight-runtime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqldelight" }
 sqldelight-driver-android = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
 sqldelight-driver-native = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqldelight" }
