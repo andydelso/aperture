@@ -1,37 +1,34 @@
 package com.ddaypunk.aperture.screen
 
+import ApertureDatabaseRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ddaypunk.aperture.R
 import com.ddaypunk.aperture.component.CheckableRowState
 import com.ddaypunk.aperture.component.ExpandableCardState
-import com.ddaypunk.aperture.db.ApertureDatabase
 import com.ddaypunk.aperture.db.SelectAllAwardNominees
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class MainScreenViewModel(
-    private val apertureDatabase: ApertureDatabase
-) : ViewModel() {
+) : ViewModel(), KoinComponent {
     private val _uiState = MutableStateFlow<MainScreenState>(MainScreenState.Loading)
     val uiState: StateFlow<MainScreenState> = _uiState.asStateFlow()
+    private val repository: ApertureDatabaseRepository by inject()
 
     init {
         viewModelScope.launch {
-            val data = apertureDatabase.awardNomineeQueries.selectAllAwardNominees().executeAsList()
-            val state = mapDataToState(data)
+            val state = mapDataToState(repository.getAllAwardNominees())
             // emit the state to the UI
             _uiState.update {
                 MainScreenState.Ready(uiState = state)
             }
         }
-    }
-
-    fun toggleCheckboxState(id: Long, state: Boolean) {
-        // implement me
     }
 
     private fun mapDataToState(data: List<SelectAllAwardNominees>) =
