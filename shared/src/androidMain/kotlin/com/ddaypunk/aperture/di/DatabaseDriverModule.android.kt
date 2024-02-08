@@ -1,13 +1,16 @@
-import android.content.Context
+package com.ddaypunk.aperture.di
+
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.ddaypunk.aperture.db.ApertureDatabase
+import org.koin.dsl.module
 
-actual class DriverFactory(private val context: Context) {
-    actual fun createDriver(): SqlDriver =
+actual val databaseDriverModule = module {
+    single<SqlDriver> {
         AndroidSqliteDriver(
             ApertureDatabase.Schema,
-            context,
-            "test.db"
+            get(),
+            "aperture.db"
         )
+    }
 }
