@@ -5,21 +5,19 @@ struct ContentView: View {
     @ObservedObject var vm = ContentViewModel()
 
     var body: some View {
-
-        Section(header: Text("Best Motion Picture")) {
-            VStack {
-                List(0..<vm.items.count) { num in
-                    VStack {
-                        Text(vm.items[num].name)
+        List {
+            Section(header: Text("Best Motion Picture")) {
+                    ForEach(0..<vm.items.count) { num in
+                        VStack {
+                            Text(vm.items[num].name)
                                 .font(.callout)
-                        Text(vm.items[num].categoryName)
-                                .font(.body)
+                        }
+                        //.foregroundColor(.lightGray)
                     }
-                    //.foregroundColor(.lightGray)
-                }
+
             }
         }
-                .navigationTitle("Nominees")
+                .navigationTitle("Title")
     }
 }
 

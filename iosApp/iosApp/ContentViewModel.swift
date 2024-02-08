@@ -11,11 +11,6 @@ import Shared
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    //  let driverFactory: DriverFactory
-
-    //  init(driverFactory: DriverFactory = DriverFactory()) {
-    //    self.driverFactory = driverFactory
-    //  }
     @Published var items: [SelectAllAwardNominees]
 
     init() {
