@@ -35,6 +35,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.sqldelight.runtime)
+            api(libs.koin.core)
+            api(libs.koin.test)
+            implementation("co.touchlab:stately-common:2.0.5")
         }
         androidMain.dependencies {
             implementation(libs.sqldelight.driver.android)
