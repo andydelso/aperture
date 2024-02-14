@@ -29,26 +29,19 @@ import androidx.compose.ui.unit.sp
 fun CheckableRow(
     state: CheckableRowState
 ) {
-    // This will need to be in the ViewModel later
-    val checked = remember { mutableStateOf(false) }
-
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.toggleable(
-            value = checked.value,
-            enabled = true,
+        modifier = Modifier
+            .toggleable(
+            value = state.isChecked,
+            onValueChange = { state.onCheckedChange.invoke() },
             role = Role.Checkbox
-        ) { isChecked ->
-            checked.value = isChecked
-        }
+        ),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
 
         Checkbox(
-            checked = checked.value,
-            enabled = true,
-            onCheckedChange = { isChecked ->
-                checked.value = isChecked
-            }
+            checked = state.isChecked,
+            onCheckedChange = null // to leverage only the row as clickable for now
         )
         Text(
             modifier = Modifier.weight(1f),
@@ -68,5 +61,7 @@ fun CheckableRow(
 data class CheckableRowState(
     val rowId: Long,
     val title: String,
+    val isChecked: Boolean,
+    val onCheckedChange: () -> Unit,
     @DrawableRes val endIcon: Int? = null,
 )

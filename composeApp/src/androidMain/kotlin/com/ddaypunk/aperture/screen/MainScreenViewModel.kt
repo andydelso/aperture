@@ -35,6 +35,43 @@ class MainScreenViewModel(
         MainScreenUiState(
             seasons = data.toListOfSeasonEntryStates()
         )
+
+    fun onCheckboxToggle(rowId: Long, isChecked: Boolean) {
+        repository.updateNomineeWatched(rowId, isChecked)
+
+        val state = mapDataToState(repository.getAllAwardNominees())
+        // emit the state to the UI
+        _uiState.update {
+            MainScreenState.Ready(uiState = state)
+        }
+    }
+
+    private fun List<SelectAllAwardNominees>.toListOfSeasonEntryStates(): List<SeasonEntryState> {
+        return this
+            .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
+            .mapNotNull { year ->
+                SeasonEntryState(
+                    title = year.key.toString(),
+                    categoryStates = year.value.groupBy { it.categoryName }
+                        .mapNotNull { category ->
+                            ExpandableCardState(
+                                title = category.key,
+                                nomineeStates = category.value.map { nominee ->
+                                    CheckableRowState(
+                                        rowId = nominee.id,
+                                        title = nominee.name,
+                                        isChecked = nominee.watched,
+                                        onCheckedChange = { onCheckboxToggle(nominee.id, !nominee.watched) },
+                                        endIcon = if (nominee.won) R.drawable.ic_trophy_24 else null
+//                                    secondary = nominee.secondaryInfo.split(","),
+//                                    note = nominee.notes
+                                    )
+                                }
+                            )
+                        }
+                )
+            }
+    }
 }
 
 sealed class MainScreenState {
@@ -50,28 +87,3 @@ data class SeasonEntryState(
     val title: String,
     val categoryStates: List<ExpandableCardState>
 )
-
-fun List<SelectAllAwardNominees>.toListOfSeasonEntryStates(): List<SeasonEntryState> {
-    return this
-        .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
-        .mapNotNull { year ->
-            SeasonEntryState(
-                title = year.key.toString(),
-                categoryStates = year.value.groupBy { it.categoryName }
-                    .mapNotNull { category ->
-                        ExpandableCardState(
-                            title = category.key,
-                            nomineeStates = category.value.map { nominee ->
-                                CheckableRowState(
-                                    rowId = nominee.id,
-                                    title = nominee.name,
-                                    endIcon = if (nominee.won) R.drawable.ic_trophy_24 else null
-//                                    secondary = nominee.secondaryInfo.split(","),
-//                                    note = nominee.notes
-                                )
-                            }
-                        )
-                    }
-            )
-        }
-}
