@@ -50,27 +50,43 @@ class MainScreenViewModel(
         return this
             .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
             .mapNotNull { year ->
-                SeasonEntryState(
-                    title = year.key.toString(),
-                    categoryStates = year.value.groupBy { it.categoryName }
-                        .mapNotNull { category ->
-                            ExpandableCardState(
-                                title = category.key,
-                                nomineeStates = category.value.map { nominee ->
-                                    CheckableRowState(
-                                        rowId = nominee.id,
-                                        title = nominee.name,
-                                        isChecked = nominee.watched,
-                                        onCheckedChange = { onCheckboxToggle(nominee.id, !nominee.watched) },
-                                        endIcon = if (nominee.won) R.drawable.ic_trophy_24 else null
-//                                    secondary = nominee.secondaryInfo.split(","),
-//                                    note = nominee.notes
-                                    )
-                                }
-                            )
-                        }
-                )
+                mapSeasonEntryState(year)
             }
+    }
+
+    private fun mapSeasonEntryState(year: Map.Entry<Long, List<SelectAllAwardNominees>>) =
+        SeasonEntryState(
+            title = year.key.toString(),
+            categoryStates = year.value.groupBy { it.categoryName }
+                .mapNotNull { category ->
+                    mapExpandableCardState(category)
+                }
+        )
+
+    private fun mapExpandableCardState(category: Map.Entry<String, List<SelectAllAwardNominees>>) =
+        ExpandableCardState(
+            title = category.key,
+            nomineeStates = category.value.map { nominee ->
+                mapCheckableRowState(nominee)
+            }
+        )
+
+    private fun mapCheckableRowState(nominee: SelectAllAwardNominees) =
+        CheckableRowState(
+            rowId = nominee.id,
+            title = nominee.name,
+            isChecked = nominee.watched,
+            onCheckedChange = {
+                onCheckboxToggle(
+                    rowId = nominee.id,
+                    isChecked = !nominee.watched
+                )
+            },
+            endIcon = getWinnerIcon(nominee.won)
+        )
+
+    private fun getWinnerIcon(isWinner: Boolean): Int? {
+        return if (isWinner) R.drawable.ic_trophy_24 else null
     }
 }
 
