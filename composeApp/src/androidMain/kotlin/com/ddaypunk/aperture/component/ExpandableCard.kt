@@ -35,7 +35,7 @@ fun ExpandableCard(
     state: ExpandableCardState,
     accessibilityState: ExpandableCardAccessibilityState,
 ) {
-    // TODO: move this into the VM with actions
+    // TODO: move this into the VM with actions - this can allow us to expand the first by default
     var showNominations by remember { mutableStateOf(false) }
     Card {
         Column {
@@ -84,6 +84,8 @@ fun ExpandableCard(
                             state = CheckableRowState(
                                 rowId = nominee.rowId,
                                 title = nominee.title,
+                                isChecked = nominee.isChecked,
+                                onCheckedChange = nominee.onCheckedChange,
                                 endIcon = nominee.endIcon
 //                                note = nominee.note,
 //                                secondary = nominee.secondary

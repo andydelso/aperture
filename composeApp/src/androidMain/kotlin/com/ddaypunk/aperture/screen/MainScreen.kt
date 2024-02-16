@@ -99,15 +99,21 @@ fun MainScreenReadyPreview() {
                                     nomineeStates = listOf(
                                         CheckableRowState(
                                             rowId = 1,
-                                            title = "Star Wars: The Force Awakens"
+                                            title = "Star Wars: The Force Awakens",
+                                            isChecked = true,
+                                            onCheckedChange = {}
                                         ),
                                         CheckableRowState(
                                             rowId = 2,
-                                            title = "Harry Potter and the Order of the Phoenix"
+                                            title = "Harry Potter and the Order of the Phoenix",
+                                            isChecked = true,
+                                            onCheckedChange = {}
                                         ),
                                         CheckableRowState(
                                             rowId = 3,
-                                            title = "Space Balls II: The Search for More Money"
+                                            title = "Space Balls II: The Search for More Money",
+                                            isChecked = true,
+                                            onCheckedChange = {}
                                         ),
                                     )
                                 )
