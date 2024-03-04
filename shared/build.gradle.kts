@@ -31,7 +31,7 @@ kotlin {
 //            isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.sqldelight.runtime)

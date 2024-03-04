@@ -1,4 +1,4 @@
-package com.ddaypunk.aperture
+//package com.ddaypunk.aperture
 //
 //import com.ddaypunk.aperture.data.Award
 //import com.ddaypunk.aperture.data.Nominee
