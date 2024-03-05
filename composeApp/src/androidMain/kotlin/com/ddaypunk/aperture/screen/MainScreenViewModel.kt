@@ -80,6 +80,9 @@ class MainScreenViewModel(
                     isChecked = !nominee.watched
                 )
             },
+            // TODO: make call to KTOR for poster image
+            // TODO: in future, check if in persistence, otherwise make call and store
+            //  image = ,
             endIcon = getWinnerIcon(nominee.won)
         )
 
