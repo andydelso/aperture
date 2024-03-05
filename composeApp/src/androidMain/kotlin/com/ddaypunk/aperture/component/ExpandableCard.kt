@@ -4,8 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Card
@@ -83,7 +81,7 @@ fun ExpandableCard(
                 visible = showNominations
             ) {
                 Column {
-                    state.nomineeStates.forEachIndexed { index, nominee ->
+                    state.nomineeStates.forEach { nominee ->
                         key(nominee.rowId) {
                             CheckableRow(
                                 state = CheckableRowState(
@@ -95,9 +93,6 @@ fun ExpandableCard(
                                     endIcon = nominee.endIcon
                                 )
                             )
-                            if (index < state.nomineeStates.size) {
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
                         }
                     }
                 }
