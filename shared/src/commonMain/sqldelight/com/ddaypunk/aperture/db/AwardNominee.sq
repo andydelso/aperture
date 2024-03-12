@@ -8,16 +8,29 @@ CREATE TABLE awardNominee (
     PRIMARY KEY (awardId, nomineeId)
 );
 
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 1);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 2);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 3);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 4);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 5);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 6);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 7);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 8);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 9);
-INSERT INTO awardNominee (awardId, nomineeId) VALUES (1, 10);
+INSERT INTO awardNominee (awardId, nomineeId, won)
+VALUES
+    (1, 1, 0),
+    (1, 2, 0),
+    (1, 3, 0),
+    (1, 4, 0),
+    (1, 5, 0),
+    (1, 6, 1),
+    (1, 7, 0),
+    (1, 8, 0),
+    (1, 9, 0),
+    (1, 10, 0),
+    (2,1, 1),
+    (2,3, 0),
+    (2,6, 0),
+    (2,8, 0),
+    (2,10, 0);
+
+-- INSERT INTO awardNominee (awardId, nomineeId) VALUES (2, 11);
+-- INSERT INTO awardNominee (awardId, nomineeId) VALUES (2, 12);
+-- INSERT INTO awardNominee (awardId, nomineeId) VALUES (2, 13);
+-- INSERT INTO awardNominee (awardId, nomineeId) VALUES (2, 14);
+-- INSERT INTO awardNominee (awardId, nomineeId) VALUES (2, 15);
 
 selectAllAwardNominees:
 SELECT category.name AS categoryName, year.year AS awardYear, nominee.id, nominee.name, nominee.type, nominee.secondaryInfo, nominee.watched, won, notes
