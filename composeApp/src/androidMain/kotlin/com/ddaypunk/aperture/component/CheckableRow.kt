@@ -1,23 +1,23 @@
 package com.ddaypunk.aperture.component
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Badge
 import androidx.compose.material.Checkbox
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -35,6 +35,7 @@ fun CheckableRow(
     with(state) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(end = 16.dp)
         ) {
 
             Checkbox(
@@ -62,13 +63,13 @@ fun CheckableRow(
                     )
                 )
             }
-            endIcon?.let { nonNullEndIcon ->
-                Image(
-                    modifier = Modifier.padding(end = 16.dp),
-                    painter = painterResource(nonNullEndIcon),
-                    contentDescription = "category winner",
-                    colorFilter = ColorFilter.tint(Color.Yellow)
-                )
+            if (isWinner) {
+                Badge(
+                    backgroundColor = MaterialTheme.colors.primary,
+                    contentColor = MaterialTheme.colors.onPrimary
+                ) {
+                    Icon(imageVector = Icons.Default.Star, contentDescription = "category winner")
+                }
             }
         }
     }
@@ -85,7 +86,7 @@ fun CheckableRowPreview() {
                     title = "Star Wars: The Force Awakens",
                     isChecked = false,
                     onCheckedChange = {},
-                    endIcon = null
+                    isWinner = false
                 )
             )
         }
@@ -99,5 +100,5 @@ data class CheckableRowState(
     val isChecked: Boolean,
     val onCheckedChange: () -> Unit,
     val image: String? = null,
-    @DrawableRes val endIcon: Int? = null,
+    val isWinner: Boolean = false
 )
