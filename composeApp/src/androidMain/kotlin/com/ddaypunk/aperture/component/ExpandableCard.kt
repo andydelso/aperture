@@ -92,7 +92,7 @@ fun ExpandableCard(
                                     isChecked = nominee.isChecked,
                                     onCheckedChange = nominee.onCheckedChange,
                                     image = nominee.image,
-                                    endIcon = nominee.endIcon
+                                    isWinner = nominee.isWinner
                                 )
                             )
                             if (index != state.nomineeStates.size - 1) {
