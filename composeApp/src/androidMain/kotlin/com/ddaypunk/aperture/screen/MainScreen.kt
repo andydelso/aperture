@@ -29,9 +29,12 @@ fun MainScreen(
 ) {
     val state = viewModel.uiState.collectAsState()
 
-    when(state.value) {
+    when (state.value) {
         is MainScreenState.Ready -> MainScreenReady(state.value as MainScreenState.Ready)
         is MainScreenState.Loading -> MainScreenLoading()
+        else -> {
+            // TODO: handle error state
+        }
     }
 }
 
@@ -56,8 +59,8 @@ fun MainScreenReady(state: MainScreenState.Ready) {
         verticalArrangement = Arrangement
             .spacedBy(8.dp)
     ) {
-        with(state.uiState) {
-            seasons?.let { nonNullSeasons ->
+        with(state) {
+            seasons.let { nonNullSeasons ->
                 nonNullSeasons.forEach { season ->
                     stickyHeader {
                         SectionHeader(
@@ -89,33 +92,31 @@ fun MainScreenReadyPreview() {
     MaterialTheme {
         MainScreenReady(
             state = MainScreenState.Ready(
-                uiState = MainScreenUiState(
-                    seasons = listOf(
-                        SeasonEntryState(
-                            title = "2024",
-                            categoryStates = listOf(
-                                ExpandableCardState(
-                                    title = "Best Previews Ever",
-                                    nomineeStates = listOf(
-                                        CheckableRowState(
-                                            rowId = 1,
-                                            title = "Star Wars: The Force Awakens",
-                                            isChecked = true,
-                                            onCheckedChange = {}
-                                        ),
-                                        CheckableRowState(
-                                            rowId = 2,
-                                            title = "Harry Potter and the Order of the Phoenix",
-                                            isChecked = true,
-                                            onCheckedChange = {}
-                                        ),
-                                        CheckableRowState(
-                                            rowId = 3,
-                                            title = "Space Balls II: The Search for More Money",
-                                            isChecked = true,
-                                            onCheckedChange = {}
-                                        ),
-                                    )
+                seasons = listOf(
+                    SeasonEntryState(
+                        title = "2024",
+                        categoryStates = listOf(
+                            ExpandableCardState(
+                                title = "Best Previews Ever",
+                                nomineeStates = listOf(
+                                    CheckableRowState(
+                                        rowId = 1,
+                                        title = "Star Wars: The Force Awakens",
+                                        isChecked = true,
+                                        onCheckedChange = {}
+                                    ),
+                                    CheckableRowState(
+                                        rowId = 2,
+                                        title = "Harry Potter and the Order of the Phoenix",
+                                        isChecked = true,
+                                        onCheckedChange = {}
+                                    ),
+                                    CheckableRowState(
+                                        rowId = 3,
+                                        title = "Space Balls II: The Search for More Money",
+                                        isChecked = true,
+                                        onCheckedChange = {}
+                                    ),
                                 )
                             )
                         )

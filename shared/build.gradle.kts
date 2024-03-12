@@ -35,6 +35,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
             api(libs.koin.core)
             api(libs.koin.test)
             implementation("co.touchlab:stately-common:2.0.5")

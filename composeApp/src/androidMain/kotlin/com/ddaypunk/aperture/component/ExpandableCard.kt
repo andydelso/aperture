@@ -10,7 +10,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.IconToggleButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -80,17 +82,17 @@ fun ExpandableCard(
             ) {
                 Column {
                     state.nomineeStates.forEach { nominee ->
-                        CheckableRow(
-                            state = CheckableRowState(
-                                rowId = nominee.rowId,
-                                title = nominee.title,
-                                isChecked = nominee.isChecked,
-                                onCheckedChange = nominee.onCheckedChange,
-                                endIcon = nominee.endIcon
-//                                note = nominee.note,
-//                                secondary = nominee.secondary
+                        key(nominee.rowId) {
+                            CheckableRow(
+                                state = CheckableRowState(
+                                    rowId = nominee.rowId,
+                                    title = nominee.title,
+                                    isChecked = nominee.isChecked,
+                                    onCheckedChange = nominee.onCheckedChange,
+                                    endIcon = nominee.endIcon
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
@@ -98,11 +100,13 @@ fun ExpandableCard(
     }
 }
 
+@Immutable
 data class ExpandableCardState(
     val title: String,
     val nomineeStates: List<CheckableRowState>
 )
 
+@Immutable
 data class ExpandableCardAccessibilityState(
     val seasonYear: String
 )

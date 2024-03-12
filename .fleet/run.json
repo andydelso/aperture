@@ -1,15 +1,15 @@
 {
-    "configurations": [
-        {
-            "name": "iosApp",
-            "type": "xcode-app",
-            "workingDir": "/Users/giovanninoa/code/aperture",
-            "buildTarget": {
-                "project": "iosApp",
-                "target": "iosApp"
-            },
-            "configuration": "Debug",
-            "destination": "iPhone 14 Pro Max | iOS 17.0"
-        }
-    ]
+  "configurations": [
+    {
+      "name": "iosApp",
+      "type": "xcode-app",
+      "workingDir": "/Users/giovanninoa/code/aperture",
+      "buildTarget": {
+        "project": "iosApp",
+        "target": "iosApp"
+      },
+      "configuration": "Debug",
+      "destination": "iPhone 14 Pro Max | iOS 17.0"
+    }
+  ]
 }
