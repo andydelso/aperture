@@ -3,4 +3,8 @@ CREATE TABLE category (
   name TEXT UNIQUE NOT NULL
 );
 
-INSERT INTO category (name) VALUES ("Best Motion Picture of the Year");
+INSERT INTO category (name)
+VALUES
+    ("Best Motion Picture of the Year"), -- 1
+    ("Best Adapted Screenplay"), -- 2
+    ("Best Animated Feature Film"); -- 3
