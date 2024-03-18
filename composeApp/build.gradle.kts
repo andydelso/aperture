@@ -25,6 +25,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.compose.viewmodel)
             implementation(libs.koin.core)
             implementation(libs.koin.android)
+            implementation(libs.coil.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

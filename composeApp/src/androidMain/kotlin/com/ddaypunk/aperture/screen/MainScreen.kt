@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -90,39 +91,41 @@ fun MainScreenReady(state: MainScreenState.Ready) {
 @Composable
 fun MainScreenReadyPreview() {
     MaterialTheme {
-        MainScreenReady(
-            state = MainScreenState.Ready(
-                seasons = listOf(
-                    SeasonEntryState(
-                        title = "2024",
-                        categoryStates = listOf(
-                            ExpandableCardState(
-                                title = "Best Previews Ever",
-                                nomineeStates = listOf(
-                                    CheckableRowState(
-                                        rowId = 1,
-                                        title = "Star Wars: The Force Awakens",
-                                        isChecked = true,
-                                        onCheckedChange = {}
-                                    ),
-                                    CheckableRowState(
-                                        rowId = 2,
-                                        title = "Harry Potter and the Order of the Phoenix",
-                                        isChecked = true,
-                                        onCheckedChange = {}
-                                    ),
-                                    CheckableRowState(
-                                        rowId = 3,
-                                        title = "Space Balls II: The Search for More Money",
-                                        isChecked = true,
-                                        onCheckedChange = {}
-                                    ),
+        Surface {
+            MainScreenReady(
+                state = MainScreenState.Ready(
+                    seasons = listOf(
+                        SeasonEntryState(
+                            title = "2024",
+                            categoryStates = listOf(
+                                ExpandableCardState(
+                                    title = "Best Previews Ever",
+                                    nomineeStates = listOf(
+                                        CheckableRowState(
+                                            rowId = 1,
+                                            title = "Star Wars: The Force Awakens",
+                                            isChecked = true,
+                                            onCheckedChange = {}
+                                        ),
+                                        CheckableRowState(
+                                            rowId = 2,
+                                            title = "Harry Potter and the Order of the Phoenix",
+                                            isChecked = true,
+                                            onCheckedChange = {}
+                                        ),
+                                        CheckableRowState(
+                                            rowId = 3,
+                                            title = "Space Balls II: The Search for More Money",
+                                            isChecked = true,
+                                            onCheckedChange = {}
+                                        ),
+                                    )
                                 )
                             )
                         )
                     )
                 )
             )
-        )
+        }
     }
 }

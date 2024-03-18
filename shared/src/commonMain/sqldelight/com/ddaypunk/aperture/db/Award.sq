@@ -4,5 +4,8 @@ CREATE TABLE award (
   yearId INTEGER REFERENCES year(id)
 );
 
--- 1 - Best Picture - 2024
-INSERT INTO award (categoryId, yearId) VALUES (1, 1);
+INSERT INTO award (categoryId, yearId)
+VALUES
+    (1, 1), -- 1 - Best Motion Picture of the Year - 2024
+    (2, 1), -- 2 - Best Adapted Screenplay - 2024
+    (3, 1); -- 3 - Best Animated Feature Film - 2024

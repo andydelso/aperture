@@ -46,12 +46,16 @@ class MainScreenViewModel(
 
     private fun List<SelectAllAwardNominees>.toListOfSeasonEntryStates(): List<SeasonEntryState> {
         return this
-            .groupBy { it.awardYear } // map of year: Long to awardNominees: List<SelectAllAwardNominees>
+            .groupBy { it.awardYear }
             .mapNotNull { year ->
                 mapSeasonEntryState(year)
             }
     }
 
+    /**
+     * Create the state for each awards season
+     * @return [SeasonEntryState]
+     */
     private fun mapSeasonEntryState(year: Map.Entry<Long, List<SelectAllAwardNominees>>) =
         SeasonEntryState(
             title = year.key.toString(),
@@ -61,13 +65,22 @@ class MainScreenViewModel(
                 }
         )
 
-    private fun mapExpandableCardState(category: Map.Entry<String, List<SelectAllAwardNominees>>) =
-        ExpandableCardState(
+    /**
+     * Create the state for each expandable card using DB data models
+     * @return [ExpandableCardState] with nominees sorted by winner at top, then by title
+     */
+    private fun mapExpandableCardState(category: Map.Entry<String, List<SelectAllAwardNominees>>): ExpandableCardState {
+        val sorted = category.value.sortedWith(
+            compareBy({ !it.won }, { it.name })
+        )
+
+        return ExpandableCardState(
             title = category.key,
-            nomineeStates = category.value.map { nominee ->
+            nomineeStates = sorted.map { nominee ->
                 mapCheckableRowState(nominee)
             }
         )
+    }
 
     private fun mapCheckableRowState(nominee: SelectAllAwardNominees) =
         CheckableRowState(
@@ -80,7 +93,7 @@ class MainScreenViewModel(
                     isChecked = !nominee.watched
                 )
             },
-            endIcon = getWinnerIcon(nominee.won)
+            isWinner = nominee.won
         )
 
     private fun getWinnerIcon(isWinner: Boolean): Int? {

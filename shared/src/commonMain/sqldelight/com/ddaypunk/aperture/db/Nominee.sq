@@ -5,19 +5,27 @@ CREATE TABLE nominee (
   name TEXT NOT NULL,
   type TEXT,
   watched INTEGER AS Boolean DEFAULT 0 NOT NULL, -- we want this to show for multiple categories if needed
-  secondaryInfo TEXT NOT NULL
+  secondaryInfo TEXT NOT NULL,
+  imdbID TEXT NOT NULL
 );
 
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("American Fiction", "FILM","Ben LeClair,Nikos Karamigios,Cord Jefferson,Jermaine Johnson"); -- 1
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Anatomy of a Fall", "FILM", "Marie-Ange Luciani,David Thion"); -- 2
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Barbie", "FILM", "David Heyman,Margot Robbie,Tom Ackerley,Robbie Brenner"); -- 3
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Killers of the Flower Moon", "FILM", "Dan Friedkin,Bradley Thomas,Martin Scorsese,Daniel Lupi"); -- 4
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Maestro", "FILM", "Bradley Cooper,Steven Spielberg,Fred Berner,Amy Durning,Kristie Macosko Krieger"); -- 5
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Oppenheimer", "FILM", "Emma Thomas,Charles Roven,Christopher Nolan"); -- 6
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Past Lives", "FILM", "David Hinojosa,Christine Vachon,Pamela Koffler"); -- 7
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("Poor Things", "FILM", "Ed Guine,Andrew Lowe,Yorgos Lanthimos,Emma Stone"); -- 8
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Holdovers", "FILM", "Mark Johnson"); -- 9
-INSERT INTO nominee (name, type, secondaryInfo) VALUES ("The Zone of Interest", "FILM", "James Wilson"); -- 10
+INSERT INTO nominee (name, type, secondaryInfo, imdbID)
+VALUES
+    ("American Fiction", "FILM","Ben LeClair,Nikos Karamigios,Cord Jefferson,Jermaine Johnson", "tt17009710"), -- 1
+    ("Anatomy of a Fall", "FILM", "Marie-Ange Luciani,David Thion", "tt17009710"), -- 2
+    ("Barbie", "FILM", "David Heyman,Margot Robbie,Tom Ackerley,Robbie Brenner", "tt1517268"), -- 3
+    ("Killers of the Flower Moon", "FILM", "Dan Friedkin,Bradley Thomas,Martin Scorsese,Daniel Lupi", "tt5537002"), -- 4
+    ("Maestro", "FILM", "Bradley Cooper,Steven Spielberg,Fred Berner,Amy Durning,Kristie Macosko Krieger", "tt5535276"), -- 5
+    ("Oppenheimer", "FILM", "Emma Thomas,Charles Roven,Christopher Nolan", "tt15398776"), -- 6
+    ("Past Lives", "FILM", "David Hinojosa,Christine Vachon,Pamela Koffler", "tt13238346"), -- 7
+    ("Poor Things", "FILM", "Ed Guine,Andrew Lowe,Yorgos Lanthimos,Emma Stone", "tt14230458"), -- 8
+    ("The Holdovers", "FILM", "Mark Johnson", "tt14849194"), -- 9
+    ("The Zone of Interest", "FILM", "James Wilson", "tt7160372"); -- 10
+--     ("The Boy and the Heron", "FILM", "Hayao Miyazaki, Soma Santoki, Masaki Suda, Kô Shibasaki, Aimyon"),
+--     ("Elemental", "FILM", "Peter Sohn, Leah Lewis, Mamoudou Athie, Ronnie Del Carmen, Shila Ommi"),
+--     ("Nimona", "FILM", "Nick Bruno, Troy Quane, Chloë Grace Moretz, Riz Ahmed, Eugene Lee Yang, Frances Conroy"),
+--     ("Robot Dreams", "FILM", "Pablo Berger, Ivan Labanda, Albert Trifol Segarra, Rafa Calvo, José García Tos"),
+--     ("Spider-Man: Across the Spider-Verse", "FILM", "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson, Shameik Moore, Hailee Steinfeld, Brian Tyree Henry, Luna Lauren Velez"),
 
 updateNomineeWatched:
 UPDATE nominee

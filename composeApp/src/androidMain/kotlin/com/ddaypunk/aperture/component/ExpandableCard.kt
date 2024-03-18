@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.IconToggleButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -21,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ddaypunk.aperture.R
 
 /**
@@ -56,7 +57,7 @@ fun ExpandableCard(
                 Text(
                     modifier = Modifier.weight(1f),
                     text = state.title,
-                    fontSize = 20.sp
+                    style = MaterialTheme.typography.body1
                 )
                 IconToggleButton(
                     checked = showNominations,
@@ -80,8 +81,9 @@ fun ExpandableCard(
             AnimatedVisibility(
                 visible = showNominations
             ) {
+                Divider()
                 Column {
-                    state.nomineeStates.forEach { nominee ->
+                    state.nomineeStates.forEachIndexed { index, nominee ->
                         key(nominee.rowId) {
                             CheckableRow(
                                 state = CheckableRowState(
@@ -89,9 +91,13 @@ fun ExpandableCard(
                                     title = nominee.title,
                                     isChecked = nominee.isChecked,
                                     onCheckedChange = nominee.onCheckedChange,
-                                    endIcon = nominee.endIcon
+                                    image = nominee.image,
+                                    isWinner = nominee.isWinner
                                 )
                             )
+                            if (index != state.nomineeStates.size - 1) {
+                                Divider(modifier = Modifier.padding(horizontal = 16.dp))
+                            }
                         }
                     }
                 }
