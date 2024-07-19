@@ -1,5 +1,6 @@
 package com.ddaypunk.aperture.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Badge
@@ -30,7 +31,8 @@ import coil.compose.AsyncImage
  */
 @Composable
 fun CheckableRow(
-    state: CheckableRowState
+    state: CheckableRowState,
+    onRowClick: (Long) -> Unit
 ) {
     with(state) {
         Row(
@@ -44,9 +46,11 @@ fun CheckableRow(
                 onCheckedChange = { onCheckedChange.invoke() }
             )
             Text(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { onRowClick.invoke(state.rowId) },
                 text = title,
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.body1,
             )
             image?.let { nonNullImage ->
                 AsyncImage(
@@ -87,7 +91,8 @@ fun CheckableRowPreview() {
                     isChecked = false,
                     onCheckedChange = {},
                     isWinner = false
-                )
+                ),
+                onRowClick = {}
             )
         }
     }

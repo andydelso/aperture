@@ -16,9 +16,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class MainScreenViewModel(
-
-) : ViewModel(), KoinComponent {
+class MainScreenViewModel : ViewModel(), KoinComponent {
     private val repository: ApertureDatabaseRepository by inject()
 
     private val _uiState = MutableStateFlow<MainScreenState>(MainScreenState.Loading)

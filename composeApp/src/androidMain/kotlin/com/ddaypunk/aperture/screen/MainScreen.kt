@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ddaypunk.aperture.component.CheckableRowState
 import com.ddaypunk.aperture.component.ExpandableCard
 import com.ddaypunk.aperture.component.ExpandableCardAccessibilityState
@@ -26,12 +27,18 @@ import com.ddaypunk.aperture.component.SectionHeaderState
 
 @Composable
 fun MainScreen(
-    viewModel: MainScreenViewModel
+    viewModel: MainScreenViewModel = viewModel(),
+    onNavigateTo: (Long) -> Unit
 ) {
     val state = viewModel.uiState.collectAsState()
 
     when (state.value) {
-        is MainScreenState.Ready -> MainScreenReady(state.value as MainScreenState.Ready)
+        is MainScreenState.Ready -> {
+            MainScreenReady(
+                state.value as MainScreenState.Ready,
+                onNavigateTo
+            )
+        }
         is MainScreenState.Loading -> MainScreenLoading()
         else -> {
             // TODO: handle error state
@@ -52,7 +59,10 @@ fun MainScreenLoading() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MainScreenReady(state: MainScreenState.Ready) {
+fun MainScreenReady(
+    state: MainScreenState.Ready,
+    onNavigateTo: (Long) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -78,7 +88,10 @@ fun MainScreenReady(state: MainScreenState.Ready) {
                             ),
                             accessibilityState = ExpandableCardAccessibilityState(
                                 seasonYear = season.title
-                            )
+                            ),
+                            onNomineeRowClick = {
+                                onNavigateTo(it)
+                            }
                         )
                     }
                 }
@@ -124,7 +137,8 @@ fun MainScreenReadyPreview() {
                             )
                         )
                     )
-                )
+                ),
+                onNavigateTo = {}
             )
         }
     }

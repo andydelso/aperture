@@ -1,29 +1,42 @@
 package com.ddaypunk.aperture
 
-import com.ddaypunk.aperture.screen.MainScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ddaypunk.aperture.screen.MainScreenViewModel
+import androidx.navigation.navArgument
+import com.ddaypunk.aperture.screen.DetailsScreen
+import com.ddaypunk.aperture.screen.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val database = createDatabase(DriverFactory(context = applicationContext))
 
         setContent {
             val navController = rememberNavController()
 
             // TODO: very simple at this point just to have jetpack navigation in
             NavHost(navController = navController, startDestination = "main") {
-                composable("main") {
-                    MainScreen(MainScreenViewModel())
+                composable(
+                    route = "main"
+                ) {
+                    MainScreen(
+                        onNavigateTo = { nomineeId ->
+                            navController.navigate("details/$nomineeId")
+                        }
+                    )
                 }
-                // Something like the following for tapping a row to see more data
-                // composable("details/{nomineeId}")
+                composable(
+                    route = "details/{nomineeId}",
+                    arguments = listOf(navArgument("nomineeId") { type = NavType.LongType })
+                ) {
+                    DetailsScreen(
+                        nomineeId = it.arguments?.getLong("nomineeId"),
+                    )
+                }
             }
         }
     }

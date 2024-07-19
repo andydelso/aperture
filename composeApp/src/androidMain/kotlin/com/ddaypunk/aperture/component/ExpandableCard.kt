@@ -37,6 +37,7 @@ import com.ddaypunk.aperture.R
 fun ExpandableCard(
     state: ExpandableCardState,
     accessibilityState: ExpandableCardAccessibilityState,
+    onNomineeRowClick: (Long) -> Unit
 ) {
     // TODO: move this into the VM with actions - this can allow us to expand the first by default
     var showNominations by remember { mutableStateOf(false) }
@@ -92,8 +93,9 @@ fun ExpandableCard(
                                     isChecked = nominee.isChecked,
                                     onCheckedChange = nominee.onCheckedChange,
                                     image = nominee.image,
-                                    isWinner = nominee.isWinner
-                                )
+                                    isWinner = nominee.isWinner,
+                                ),
+                                onRowClick = onNomineeRowClick
                             )
                             if (index != state.nomineeStates.size - 1) {
                                 Divider(modifier = Modifier.padding(horizontal = 16.dp))
