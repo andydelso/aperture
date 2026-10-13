@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import Observation
 import Shared
-import SwiftUI
 
 /// Bridges the shared Kotlin MainScreenViewModel to SwiftUI by republishing its state
-class ContentViewModel: ObservableObject {
-    @Published private(set) var state: MainScreenState = MainScreenState.Loading.shared
+@Observable
+final class ContentViewModel {
+    private(set) var state: MainScreenState = MainScreenState.Loading.shared
 
-    private let viewModel = MainScreenViewModel()
-    private var subscription: UiStateSubscription?
+    @ObservationIgnored private let viewModel = MainScreenViewModel()
+    @ObservationIgnored private var subscription: UiStateSubscription?
 
     init() {
         // called on the main thread with the current state and every update after it

@@ -2,7 +2,7 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
-    @StateObject private var vm = ContentViewModel()
+    @State private var vm = ContentViewModel()
 
     var body: some View {
         content
@@ -14,8 +14,11 @@ struct ContentView: View {
         if let ready = vm.state as? MainScreenState.Ready {
             SeasonList(seasons: ready.seasons, onToggleWatched: vm.toggleWatched)
         } else if let error = vm.state as? MainScreenState.Error {
-            Text(error.message)
-                .foregroundColor(.secondary)
+            ContentUnavailableView(
+                "Couldn't load nominees",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.message)
+            )
         } else {
             ProgressView()
         }
@@ -30,7 +33,7 @@ struct SeasonList: View {
     var body: some View {
         List {
             ForEach(seasons, id: \.year) { season in
-                Section(header: Text(season.year).font(.title2).bold()) {
+                Section {
                     ForEach(season.categories, id: \.title) { category in
                         DisclosureGroup(category.title) {
                             ForEach(category.nominees, id: \.id) { nominee in
@@ -40,34 +43,36 @@ struct SeasonList: View {
                             }
                         }
                     }
+                } header: {
+                    Text(season.year)
+                        .font(.title2)
+                        .bold()
                 }
             }
         }
-        .listStyle(InsetGroupedListStyle())
+        .listStyle(.insetGrouped)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            SeasonList(
-                seasons: [
-                    SeasonUiModel(
-                        year: "2024",
-                        categories: [
-                            CategoryUiModel(
-                                title: "Best Previews Ever",
-                                nominees: [
-                                    NomineeUiModel(id: 1, title: "Star Wars: The Force Awakens", isWatched: true, isWinner: true, image: nil),
-                                    NomineeUiModel(id: 2, title: "Harry Potter and the Order of the Phoenix", isWatched: false, isWinner: false, image: nil),
-                                ]
-                            )
-                        ]
-                    )
-                ],
-                onToggleWatched: { _ in }
-            )
-            .navigationTitle("Aperture")
-        }
+#Preview {
+    NavigationStack {
+        SeasonList(
+            seasons: [
+                SeasonUiModel(
+                    year: "2024",
+                    categories: [
+                        CategoryUiModel(
+                            title: "Best Previews Ever",
+                            nominees: [
+                                NomineeUiModel(id: 1, title: "Star Wars: The Force Awakens", isWatched: true, isWinner: true, image: nil),
+                                NomineeUiModel(id: 2, title: "Harry Potter and the Order of the Phoenix", isWatched: false, isWinner: false, image: nil),
+                            ]
+                        )
+                    ]
+                )
+            ],
+            onToggleWatched: { _ in }
+        )
+        .navigationTitle("Aperture")
     }
 }
