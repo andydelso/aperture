@@ -1,8 +1,8 @@
 [versions]
-agp = "8.2.2"
-android-compileSdk = "34"
+agp = "8.13.0"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "34"
+android-targetSdk = "36"
 androidx-activityCompose = "1.8.2"
 androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
@@ -11,16 +11,15 @@ androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 coil = "2.6.0"
-compose = "1.5.4"
 compose-nav = "2.7.6"
 compose-viewmodel = "2.6.1"
-compose-compiler = "1.5.8"
-compose-plugin = "1.5.11"
+compose-plugin = "1.11.1"
+# Material icons are no longer published alongside Compose Multiplatform; 1.7.3 is the final release
+compose-material-icons = "1.7.3"
 junit = "4.13.2"
 koin = "3.2.0"
-kotlin = "1.9.21"
-ksp = "1.9.21-1.0.15"
-sqldelight = "2.0.1"
+kotlin = "2.4.21"
+sqldelight = "2.4.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -36,11 +35,12 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav"}
 androidx-lifecycle-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-plugin" }
+compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose-plugin" }
+compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-plugin" }
+compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose-plugin" }
+compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "compose-material-icons" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
@@ -53,6 +53,6 @@ sqldelight-coroutines = { group = "app.cash.sqldelight", name = "coroutines-exte
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
