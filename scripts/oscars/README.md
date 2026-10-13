@@ -12,8 +12,27 @@ python3 build_seed.py --out everything.db --all-classes                   # adds
 python3 -m unittest test_build_seed                                       # tests
 ```
 
-The upstream CSV is pinned by commit in `UPSTREAM_COMMIT`; bump it after a new ceremony lands
-upstream. Pass `--csv path/to/oscars.csv` to use a local copy instead of downloading.
+The app ships the default output (every film category) and queries by `category.canonicalName`,
+so the Best Picture focus is a query filter rather than missing data. Other categories can be
+surfaced later without a new import.
+
+Pass `--csv path/to/oscars.csv` to use a local copy instead of downloading.
+
+## Updating for a new ceremony
+
+The upstream CSV is pinned by commit in `UPSTREAM_COMMIT` so the seed is reproducible.
+Upstream usually adds nominations in January and winners after the ceremony in March.
+
+1. Check [DLu/oscar_data commits](https://github.com/DLu/oscar_data/commits/main) for the new
+   ceremony (nominations alone have empty `Winner` values; wait for the winners commit to ship
+   results).
+2. Set `UPSTREAM_COMMIT` in `build_seed.py` to that commit's full SHA.
+3. Run `python3 -m unittest test_build_seed`, then regenerate the seed and spot-check the new
+   ceremony's Best Picture nominees and winner.
+4. Update the size table above if it moved noticeably.
+5. Ship it to existing installs with a SQLDelight migration that adds the new rows, not by
+   replacing the database file: the user's `watched` flags live in `film`. Match films on
+   `imdbId`, which is stable, rather than on the generated `id`, which follows CSV order.
 
 ## Output
 
@@ -34,3 +53,7 @@ Sizes at the 98th ceremony (2025 films):
 The source data is © 2022 David V. Lu!!, BSD 2-Clause. Its copyright notice and license must
 ship with any app that bundles the generated data:
 https://github.com/DLu/oscar_data/blob/main/LICENSE
+
+In-app attribution is tracked in [#27](https://github.com/andydelso/aperture/issues/27). Category and
+nomination data originally comes from the Academy's
+[awards database](https://awardsdatabase.oscars.org/), and film ids from IMDb.
