@@ -1,6 +1,6 @@
 [versions]
-agp = "8.2.2"
-android-compileSdk = "34"
+agp = "8.13.0"
+android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.8.2"
@@ -11,16 +11,14 @@ androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 coil = "2.6.0"
-compose = "1.5.4"
+compose = "1.12.1"
 compose-nav = "2.7.6"
 compose-viewmodel = "2.6.1"
-compose-compiler = "1.5.8"
-compose-plugin = "1.5.11"
+compose-plugin = "1.12.1"
 junit = "4.13.2"
 koin = "3.2.0"
-kotlin = "1.9.21"
-ksp = "1.9.21-1.0.15"
-sqldelight = "2.0.1"
+kotlin = "2.4.21"
+sqldelight = "2.4.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -53,6 +51,6 @@ sqldelight-coroutines = { group = "app.cash.sqldelight", name = "coroutines-exte
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
