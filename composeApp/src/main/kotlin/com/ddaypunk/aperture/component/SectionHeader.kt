@@ -28,7 +28,7 @@ fun SectionHeader(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp),
+                .padding(vertical = 8.dp),
             text = state.title,
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface

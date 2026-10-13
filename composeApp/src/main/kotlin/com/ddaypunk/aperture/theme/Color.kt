@@ -2,6 +2,10 @@ package com.ddaypunk.aperture.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Oscars brand colors used directly, outside the generated M3 roles
+val OscarsRed = Color(0xFF801B1D)
+val OscarsLightGold = Color(0xFFF3E09C)
+
 // Material 3 roles generated with Material color utilities (fidelity variant) from the Oscars brand
 // palette (brand.oscars.org): primary = dark gold #BEA260, secondary = Oscars red #801B1D,
 // tertiary = light gold #F3E09C, neutral = charcoal #55565A.

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -42,7 +43,12 @@ fun CheckableRow(
             Checkbox(
                 modifier = Modifier.padding(8.dp),
                 checked = isChecked,
-                onCheckedChange = { onCheckedChange.invoke() }
+                onCheckedChange = { onCheckedChange.invoke() },
+                // red for watched, leaving gold for winners
+                colors = CheckboxDefaults.colors(
+                    checkedColor = MaterialTheme.colorScheme.secondary,
+                    checkmarkColor = MaterialTheme.colorScheme.onSecondary
+                )
             )
             Text(
                 modifier = Modifier.weight(1f),
