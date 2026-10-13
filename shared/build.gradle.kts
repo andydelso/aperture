@@ -20,8 +20,8 @@ kotlin {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
+    // iosX64 (Intel simulator) dropped: JetBrains lifecycle-viewmodel no longer publishes it
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -37,6 +37,8 @@ kotlin {
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines)
             api(libs.koin.core)
+            // api: MainScreenViewModel extends ViewModel, so consumers need it on their classpath
+            api(libs.jetbrains.lifecycle.viewmodel)
         }
         androidMain.dependencies {
             implementation(libs.sqldelight.driver.android)

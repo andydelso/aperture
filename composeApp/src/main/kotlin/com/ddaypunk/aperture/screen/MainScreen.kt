@@ -23,12 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddaypunk.aperture.R
-import com.ddaypunk.aperture.component.CheckableRowState
 import com.ddaypunk.aperture.component.ExpandableCard
 import com.ddaypunk.aperture.component.ExpandableCardAccessibilityState
-import com.ddaypunk.aperture.component.ExpandableCardState
 import com.ddaypunk.aperture.component.SectionHeader
-import com.ddaypunk.aperture.component.SectionHeaderState
+import com.ddaypunk.aperture.presentation.CategoryUiModel
+import com.ddaypunk.aperture.presentation.MainScreenState
+import com.ddaypunk.aperture.presentation.MainScreenViewModel
+import com.ddaypunk.aperture.presentation.NomineeUiModel
+import com.ddaypunk.aperture.presentation.SeasonUiModel
 import com.ddaypunk.aperture.theme.ApertureTheme
 import com.ddaypunk.aperture.theme.OscarsLightGold
 import com.ddaypunk.aperture.theme.OscarsRed
@@ -45,6 +47,7 @@ fun MainScreen(
         when (state.value) {
             is MainScreenState.Ready -> MainScreenReady(
                 state = state.value as MainScreenState.Ready,
+                onWatchedToggle = viewModel::onWatchedToggle,
                 contentPadding = innerPadding
             )
             is MainScreenState.Loading -> MainScreenLoading(
@@ -84,6 +87,7 @@ fun MainScreenLoading(modifier: Modifier = Modifier) {
 @Composable
 fun MainScreenReady(
     state: MainScreenState.Ready,
+    onWatchedToggle: (nomineeId: Long, isWatched: Boolean) -> Unit,
     contentPadding: PaddingValues = PaddingValues()
 ) {
     LazyColumn(
@@ -95,28 +99,17 @@ fun MainScreenReady(
         verticalArrangement = Arrangement
             .spacedBy(8.dp)
     ) {
-        with(state) {
-            seasons.let { nonNullSeasons ->
-                nonNullSeasons.forEach { season ->
-                    stickyHeader {
-                        SectionHeader(
-                            state = SectionHeaderState(
-                                title = season.title
-                            )
-                        )
-                    }
-                    items(season.categoryStates) { category ->
-                        ExpandableCard(
-                            state = ExpandableCardState(
-                                title = category.title,
-                                nomineeStates = category.nomineeStates
-                            ),
-                            accessibilityState = ExpandableCardAccessibilityState(
-                                seasonYear = season.title
-                            )
-                        )
-                    }
-                }
+        state.seasons.forEach { season ->
+            stickyHeader {
+                SectionHeader(state = season.toSectionHeaderState())
+            }
+            items(season.categories) { category ->
+                ExpandableCard(
+                    state = category.toExpandableCardState(onWatchedToggle),
+                    accessibilityState = ExpandableCardAccessibilityState(
+                        seasonYear = season.year
+                    )
+                )
             }
         }
     }
@@ -130,36 +123,37 @@ fun MainScreenReadyPreview() {
             MainScreenReady(
                 state = MainScreenState.Ready(
                     seasons = listOf(
-                        SeasonEntryState(
-                            title = "2024",
-                            categoryStates = listOf(
-                                ExpandableCardState(
+                        SeasonUiModel(
+                            year = "2024",
+                            categories = listOf(
+                                CategoryUiModel(
                                     title = "Best Previews Ever",
-                                    nomineeStates = listOf(
-                                        CheckableRowState(
-                                            rowId = 1,
+                                    nominees = listOf(
+                                        NomineeUiModel(
+                                            id = 1,
                                             title = "Star Wars: The Force Awakens",
-                                            isChecked = true,
-                                            onCheckedChange = {}
+                                            isWatched = true,
+                                            isWinner = true
                                         ),
-                                        CheckableRowState(
-                                            rowId = 2,
+                                        NomineeUiModel(
+                                            id = 2,
                                             title = "Harry Potter and the Order of the Phoenix",
-                                            isChecked = true,
-                                            onCheckedChange = {}
+                                            isWatched = true,
+                                            isWinner = false
                                         ),
-                                        CheckableRowState(
-                                            rowId = 3,
+                                        NomineeUiModel(
+                                            id = 3,
                                             title = "Space Balls II: The Search for More Money",
-                                            isChecked = true,
-                                            onCheckedChange = {}
+                                            isWatched = false,
+                                            isWinner = false
                                         ),
                                     )
                                 )
                             )
                         )
                     )
-                )
+                ),
+                onWatchedToggle = { _, _ -> }
             )
         }
     }

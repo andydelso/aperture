@@ -5,6 +5,7 @@ import Shared
 struct iOSApp: App {
     init() {
         KoinModuleKt.doInitKoin()
+        Theme.applyNavigationBarAppearance()
     }
 
     var body: some Scene {
@@ -12,6 +13,7 @@ struct iOSApp: App {
             NavigationView {
                 ContentView()
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

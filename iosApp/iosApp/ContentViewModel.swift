@@ -10,10 +10,25 @@ import Foundation
 import Shared
 import SwiftUI
 
+/// Bridges the shared Kotlin MainScreenViewModel to SwiftUI by republishing its state
 class ContentViewModel: ObservableObject {
-    @Published var items: [SelectAllAwardNominees]
+    @Published private(set) var state: MainScreenState = MainScreenState.Loading.shared
+
+    private let viewModel = MainScreenViewModel()
+    private var subscription: UiStateSubscription?
 
     init() {
-        items = KoinHelper().repository.getAllAwardNominees()
+        // called on the main thread with the current state and every update after it
+        subscription = viewModel.observeUiState { [weak self] state in
+            self?.state = state
+        }
+    }
+
+    deinit {
+        subscription?.close()
+    }
+
+    func toggleWatched(_ nominee: NomineeUiModel) {
+        viewModel.onWatchedToggle(nomineeId: nominee.id, isWatched: !nominee.isWatched)
     }
 }
