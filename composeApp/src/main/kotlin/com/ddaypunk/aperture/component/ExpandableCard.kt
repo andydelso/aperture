@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.IconToggleButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -57,7 +57,7 @@ fun ExpandableCard(
                 Text(
                     modifier = Modifier.weight(1f),
                     text = state.title,
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.bodyLarge
                 )
                 IconToggleButton(
                     checked = showNominations,
@@ -81,7 +81,7 @@ fun ExpandableCard(
             AnimatedVisibility(
                 visible = showNominations
             ) {
-                Divider()
+                HorizontalDivider()
                 Column {
                     state.nomineeStates.forEachIndexed { index, nominee ->
                         key(nominee.rowId) {
@@ -96,7 +96,7 @@ fun ExpandableCard(
                                 )
                             )
                             if (index != state.nomineeStates.size - 1) {
-                                Divider(modifier = Modifier.padding(horizontal = 16.dp))
+                                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                             }
                         }
                     }
