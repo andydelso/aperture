@@ -60,8 +60,15 @@ struct SeasonList: View {
                                 NomineeRow(nominee: nominee) {
                                     onToggleWatched(nominee)
                                 }
+                                // keep normal colors when selected; the default prominent style
+                                // turns content white and hides the red watched circle
+                                .environment(\.backgroundProminence, .standard)
                                 // tapping the row selects it, which opens its details
                                 .tag(Int64?.some(nominee.id))
+                                // subtle gold for the selected row instead of the system blue
+                                .listRowBackground(
+                                    selection == nominee.id ? Color.winnerBadge.opacity(0.3) : nil
+                                )
                             }
                         }
                     }
