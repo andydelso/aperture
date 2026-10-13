@@ -1,18 +1,37 @@
 import SwiftUI
 import Shared
 
+/// List-detail: on iPhone the details push over the list; on iPad they sit side by side
 struct ContentView: View {
     @State private var vm = ContentViewModel()
+    @State private var navigation = AppNavigation()
 
     var body: some View {
-        content
-            .navigationTitle("Aperture")
+        NavigationSplitView {
+            content
+                .navigationTitle("Aperture")
+        } detail: {
+            if let nomineeId = navigation.selectedNomineeId {
+                NomineeDetailView(nomineeId: nomineeId)
+                    // new identity per nominee, so each gets its own detail model
+                    .id(nomineeId)
+            } else {
+                NomineeDetailPlaceholder()
+            }
+        }
     }
 
     @ViewBuilder
     private var content: some View {
         if let ready = vm.state as? MainScreenState.Ready {
-            SeasonList(seasons: ready.seasons, onToggleWatched: vm.toggleWatched)
+            SeasonList(
+                seasons: ready.seasons,
+                selection: Binding(
+                    get: { navigation.selectedNomineeId },
+                    set: { navigation.selectedNomineeId = $0 }
+                ),
+                onToggleWatched: vm.toggleWatched
+            )
         } else if let error = vm.state as? MainScreenState.Error {
             ContentUnavailableView(
                 "Couldn't load nominees",
@@ -28,10 +47,11 @@ struct ContentView: View {
 /// One section per awards season, each category expandable like Android's ExpandableCard
 struct SeasonList: View {
     let seasons: [SeasonUiModel]
+    @Binding var selection: Int64?
     let onToggleWatched: (NomineeUiModel) -> Void
 
     var body: some View {
-        List {
+        List(selection: $selection) {
             ForEach(seasons, id: \.year) { season in
                 Section {
                     ForEach(season.categories, id: \.title) { category in
@@ -40,6 +60,8 @@ struct SeasonList: View {
                                 NomineeRow(nominee: nominee) {
                                     onToggleWatched(nominee)
                                 }
+                                // tapping the row selects it, which opens its details
+                                .tag(Int64?.some(nominee.id))
                             }
                         }
                     }
@@ -71,6 +93,7 @@ struct SeasonList: View {
                     ]
                 )
             ],
+            selection: .constant(nil),
             onToggleWatched: { _ in }
         )
         .navigationTitle("Aperture")

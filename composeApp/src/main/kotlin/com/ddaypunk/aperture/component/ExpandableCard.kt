@@ -85,16 +85,7 @@ fun ExpandableCard(
                 Column {
                     state.nomineeStates.forEachIndexed { index, nominee ->
                         key(nominee.rowId) {
-                            CheckableRow(
-                                state = CheckableRowState(
-                                    rowId = nominee.rowId,
-                                    title = nominee.title,
-                                    isChecked = nominee.isChecked,
-                                    onCheckedChange = nominee.onCheckedChange,
-                                    image = nominee.image,
-                                    isWinner = nominee.isWinner
-                                )
-                            )
+                            CheckableRow(state = nominee)
                             if (index != state.nomineeStates.size - 1) {
                                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                             }
