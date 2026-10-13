@@ -29,6 +29,8 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
+            // TODO: replace usages with local vector drawables and remove this dependency
+            implementation(libs.compose.material.icons.core)
             implementation(compose.ui)
             implementation(projects.shared)
         }
