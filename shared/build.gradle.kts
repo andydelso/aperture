@@ -11,6 +11,8 @@ kotlin {
         namespace = "com.ddaypunk.aperture.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
+        // runs commonTest on the JVM for Android as well; host tests are off by default with this plugin
+        withHostTest {}
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
@@ -20,8 +22,8 @@ kotlin {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
+    // iosX64 (Intel simulator) dropped: JetBrains lifecycle-viewmodel no longer publishes it
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -37,6 +39,8 @@ kotlin {
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines)
             api(libs.koin.core)
+            // api: MainScreenViewModel extends ViewModel, so consumers need it on their classpath
+            api(libs.jetbrains.lifecycle.viewmodel)
         }
         androidMain.dependencies {
             implementation(libs.sqldelight.driver.android)

@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ddaypunk.aperture.screen.MainScreenViewModel
+import com.ddaypunk.aperture.presentation.MainScreenViewModel
 import com.ddaypunk.aperture.theme.ApertureTheme
 
 class MainActivity : ComponentActivity() {

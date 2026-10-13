@@ -8,6 +8,8 @@ androidx-material3 = "1.4.0"
 coil = "3.6.3"
 compose-nav = "2.10.2"
 compose-viewmodel = "2.11.0"
+# JetBrains multiplatform lifecycle; its Android variant resolves to androidx lifecycle of the same version
+jetbrains-lifecycle = "2.11.0"
 compose-multiplatform = "1.12.1"
 # Material icons are no longer published alongside Compose Multiplatform; 1.7.3 is the final release
 compose-material-icons = "1.7.3"
@@ -20,6 +22,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav"}
 androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
 androidx-lifecycle-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
+jetbrains-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "jetbrains-lifecycle" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-multiplatform" }
