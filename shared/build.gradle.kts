@@ -11,6 +11,8 @@ kotlin {
         namespace = "com.ddaypunk.aperture.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
+        // runs commonTest on the JVM for Android as well; host tests are off by default with this plugin
+        withHostTest {}
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
