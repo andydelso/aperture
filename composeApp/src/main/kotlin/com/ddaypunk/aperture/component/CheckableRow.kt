@@ -2,12 +2,12 @@ package com.ddaypunk.aperture.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Badge
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Badge
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.ddaypunk.aperture.theme.ApertureTheme
 
 /**
  * A component to display a row of data with a checkbox and a possible end of row icon
@@ -46,7 +47,7 @@ fun CheckableRow(
             Text(
                 modifier = Modifier.weight(1f),
                 text = title,
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.bodyLarge
             )
             image?.let { nonNullImage ->
                 AsyncImage(
@@ -65,8 +66,8 @@ fun CheckableRow(
             }
             if (isWinner) {
                 Badge(
-                    backgroundColor = MaterialTheme.colors.primary,
-                    contentColor = MaterialTheme.colors.onPrimary
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 ) {
                     Icon(imageVector = Icons.Default.Star, contentDescription = "category winner")
                 }
@@ -78,8 +79,8 @@ fun CheckableRow(
 @Preview
 @Composable
 fun CheckableRowPreview() {
-    MaterialTheme {
-        Surface(color = MaterialTheme.colors.background) {
+    ApertureTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
             CheckableRow(
                 state = CheckableRowState(
                     rowId = 1,

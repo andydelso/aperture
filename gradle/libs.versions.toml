@@ -4,6 +4,7 @@ android-compileSdk = "37"
 android-minSdk = "24"
 android-targetSdk = "36"
 androidx-activityCompose = "1.13.0"
+androidx-material3 = "1.4.0"
 coil = "3.6.3"
 compose-nav = "2.10.2"
 compose-viewmodel = "2.11.0"
@@ -17,6 +18,7 @@ sqldelight = "2.4.1"
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav"}
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
 androidx-lifecycle-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
@@ -25,7 +27,6 @@ compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-mu
 compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose-multiplatform" }
 compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-multiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-multiplatform" }
-compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose-multiplatform" }
 compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "compose-material-icons" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }

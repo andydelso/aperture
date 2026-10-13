@@ -8,9 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -23,6 +22,7 @@ import com.ddaypunk.aperture.component.ExpandableCardAccessibilityState
 import com.ddaypunk.aperture.component.ExpandableCardState
 import com.ddaypunk.aperture.component.SectionHeader
 import com.ddaypunk.aperture.component.SectionHeaderState
+import com.ddaypunk.aperture.theme.ApertureTheme
 
 @Composable
 fun MainScreen(
@@ -90,7 +90,7 @@ fun MainScreenReady(state: MainScreenState.Ready) {
 @Preview
 @Composable
 fun MainScreenReadyPreview() {
-    MaterialTheme {
+    ApertureTheme {
         Surface {
             MainScreenReady(
                 state = MainScreenState.Ready(

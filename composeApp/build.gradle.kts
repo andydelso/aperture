@@ -38,7 +38,7 @@ dependencies {
 
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
-    implementation(libs.compose.material)
+    implementation(libs.androidx.material3)
     // TODO: replace usages with local vector drawables and remove this dependency
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.ui)
