@@ -3,21 +3,21 @@ agp = "8.13.0"
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
-androidx-activityCompose = "1.8.2"
+androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.12.0"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
-coil = "2.6.0"
-compose-nav = "2.7.6"
-compose-viewmodel = "2.6.1"
+coil = "3.5.0"
+compose-nav = "2.9.7"
+compose-viewmodel = "2.9.4"
 compose-plugin = "1.11.1"
 # Material icons are no longer published alongside Compose Multiplatform; 1.7.3 is the final release
 compose-material-icons = "1.7.3"
 junit = "4.13.2"
-koin = "3.2.0"
+koin = "4.1.1"
 kotlin = "2.4.21"
 sqldelight = "2.4.1"
 
@@ -34,7 +34,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav"}
 androidx-lifecycle-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-plugin" }
 compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose-plugin" }
 compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-plugin" }

@@ -34,8 +34,6 @@ kotlin {
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines)
             api(libs.koin.core)
-            api(libs.koin.test)
-            implementation("co.touchlab:stately-common:2.0.5")
         }
         androidMain.dependencies {
             implementation(libs.sqldelight.driver.android)
@@ -45,6 +43,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(libs.koin.test)
         }
     }
 }
