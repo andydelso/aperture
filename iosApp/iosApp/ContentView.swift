@@ -23,23 +23,22 @@ struct ContentView: View {
 
     @ViewBuilder
     private var content: some View {
-        switch vm.state {
-        case .ready(let seasons):
+        if let ready = vm.state as? MainScreenState.Ready {
             SeasonList(
-                seasons: seasons,
+                seasons: ready.seasons,
                 selection: Binding(
                     get: { navigation.selectedNomineeId },
                     set: { navigation.selectedNomineeId = $0 }
                 ),
                 onToggleWatched: vm.toggleWatched
             )
-        case .error(let message):
+        } else if let error = vm.state as? MainScreenState.Error {
             ContentUnavailableView(
                 "Couldn't load nominees",
                 systemImage: "exclamationmark.triangle",
-                description: Text(message)
+                description: Text(error.message)
             )
-        case .loading:
+        } else {
             ProgressView()
         }
     }
@@ -47,17 +46,17 @@ struct ContentView: View {
 
 /// One section per awards season, each category expandable like Android's ExpandableCard
 struct SeasonList: View {
-    let seasons: [SeasonItem]
+    let seasons: [SeasonUiModel]
     @Binding var selection: Int64?
-    let onToggleWatched: (NomineeItem) -> Void
+    let onToggleWatched: (NomineeUiModel) -> Void
 
     var body: some View {
         List(selection: $selection) {
-            ForEach(seasons) { season in
+            ForEach(seasons, id: \.year) { season in
                 Section {
-                    ForEach(season.categories) { category in
+                    ForEach(season.categories, id: \.title) { category in
                         DisclosureGroup(category.title) {
-                            ForEach(category.nominees) { nominee in
+                            ForEach(category.nominees, id: \.id) { nominee in
                                 NomineeRow(nominee: nominee) {
                                     onToggleWatched(nominee)
                                 }
@@ -88,14 +87,14 @@ struct SeasonList: View {
     NavigationStack {
         SeasonList(
             seasons: [
-                SeasonItem(
+                SeasonUiModel(
                     year: "2024",
                     categories: [
-                        CategoryItem(
+                        CategoryUiModel(
                             title: "Best Previews Ever",
                             nominees: [
-                                NomineeItem(id: 1, title: "Star Wars: The Force Awakens", isWatched: true, isWinner: true),
-                                NomineeItem(id: 2, title: "Harry Potter and the Order of the Phoenix", isWatched: false, isWinner: false),
+                                NomineeUiModel(id: 1, title: "Star Wars: The Force Awakens", isWatched: true, isWinner: true, image: nil),
+                                NomineeUiModel(id: 2, title: "Harry Potter and the Order of the Phoenix", isWatched: false, isWinner: false, image: nil),
                             ]
                         )
                     ]
