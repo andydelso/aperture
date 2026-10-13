@@ -12,7 +12,8 @@ python3 build_seed.py --out everything.db --all-classes                   # adds
 python3 -m unittest test_build_seed                                       # tests
 ```
 
-The app ships the default output (every film category) and queries by `category.canonicalName`,
+The app ships the default output (every film category) as `composeApp/src/main/assets/aperture.db`,
+copied into place on first launch, and queries by `category.canonicalName`,
 so the Best Picture focus is a query filter rather than missing data. Other categories can be
 surfaced later without a new import.
 
@@ -27,8 +28,12 @@ Upstream usually adds nominations in January and winners after the ceremony in M
    ceremony (nominations alone have empty `Winner` values; wait for the winners commit to ship
    results).
 2. Set `UPSTREAM_COMMIT` in `build_seed.py` to that commit's full SHA.
-3. Run `python3 -m unittest test_build_seed`, then regenerate the seed and spot-check the new
-   ceremony's Best Picture nominees and winner.
+3. Run `python3 -m unittest test_build_seed`, then regenerate the app's prebuilt database from the
+   repo root and spot-check the new ceremony's Best Picture nominees and winner:
+   ```sh
+   python3 scripts/oscars/build_seed.py --out composeApp/src/main/assets/aperture.db
+   ```
+   Android ships it from `assets/`, and the iosApp target bundles the same file by reference.
 4. Update the size table above if it moved noticeably.
 5. Ship it to existing installs with a SQLDelight migration that adds the new rows, not by
    replacing the database file: the user's `watched` flags live in `film`. Match films on
