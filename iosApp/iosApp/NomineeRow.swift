@@ -1,10 +1,9 @@
 import SwiftUI
-import Shared
 
 /// A nominee with a watched toggle and an optional winner badge, matching Android's CheckableRow.
 /// The circle toggles watched; tapping elsewhere on the row selects it (opening details).
 struct NomineeRow: View {
-    let nominee: NomineeUiModel
+    let nominee: NomineeItem
     let onToggleWatched: () -> Void
 
     var body: some View {
