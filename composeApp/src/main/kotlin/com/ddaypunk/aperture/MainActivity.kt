@@ -10,9 +10,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
+import com.ddaypunk.aperture.navigation.MainRoute
 import com.ddaypunk.aperture.presentation.MainScreenViewModel
 import com.ddaypunk.aperture.theme.ApertureTheme
 
@@ -26,19 +27,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             ApertureTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    val navController = rememberNavController()
+                    val backStack = rememberNavBackStack(MainRoute)
 
-                    // TODO: very simple at this point just to have jetpack navigation in
-                    NavHost(
-                        navController = navController,
-                        startDestination = "main"
-                    ) {
-                        composable("main") {
-                            MainScreen(viewmodel)
+                    NavDisplay(
+                        backStack = backStack,
+                        onBack = { backStack.removeLastOrNull() },
+                        entryProvider = entryProvider {
+                            entry<MainRoute> {
+                                MainScreen(viewmodel)
+                            }
+                            // Nominee details is added with shared navigation (#21)
                         }
-                        // Something like the following for tapping a row to see more data
-                        // composable("details/{nomineeId}")
-                    }
+                    )
                 }
             }
         }
