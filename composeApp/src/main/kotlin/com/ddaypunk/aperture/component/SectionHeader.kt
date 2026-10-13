@@ -1,5 +1,6 @@
 package com.ddaypunk.aperture.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,8 @@ fun SectionHeader(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            // sticky header: opaque so scrolled cards don't show through
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         Text(
             modifier = Modifier

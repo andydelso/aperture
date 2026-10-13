@@ -66,8 +66,8 @@ fun CheckableRow(
             }
             if (isWinner) {
                 Badge(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ) {
                     Icon(imageVector = Icons.Default.Star, contentDescription = "category winner")
                 }
