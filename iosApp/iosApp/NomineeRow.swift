@@ -11,9 +11,9 @@ struct NomineeRow: View {
             HStack(spacing: 12) {
                 Image(systemName: nominee.isWatched ? "checkmark.circle.fill" : "circle")
                     .imageScale(.large)
-                    .foregroundColor(nominee.isWatched ? .accentColor : .secondary)
+                    .foregroundStyle(nominee.isWatched ? Color.accentColor : Color.secondary)
                 Text(nominee.title)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                 Spacer()
                 if nominee.isWinner {
                     WinnerBadge()
@@ -31,7 +31,7 @@ struct WinnerBadge: View {
     var body: some View {
         Image(systemName: "star.fill")
             .font(.caption)
-            .foregroundColor(.onWinnerBadge)
+            .foregroundStyle(Color.onWinnerBadge)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(Capsule().fill(Color.winnerBadge))

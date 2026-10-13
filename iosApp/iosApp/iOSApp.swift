@@ -9,10 +9,9 @@ struct iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationStack {
                 ContentView()
             }
-            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
