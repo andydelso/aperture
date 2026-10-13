@@ -1,5 +1,6 @@
 -- Seed database schema written by build_seed.py.
--- Mirrors the planned SQLDelight .sq files so a prebuilt aperture.db can be shipped with the app.
+-- Mirrors the SQLDelight .sq files in shared/src/commonMain/sqldelight/com/ddaypunk/aperture/db/ so a
+-- prebuilt aperture.db can be shipped with the app. Change both together.
 
 CREATE TABLE ceremony (
     number INTEGER PRIMARY KEY,      -- 1 for the 1929 ceremony

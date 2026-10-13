@@ -25,7 +25,7 @@ class MainScreenViewModel : ViewModel(), KoinComponent {
 
     init {
         viewModelScope.launch {
-            repository.getAllAwardNomineesFlow()
+            repository.getBestPictureNominationsFlow()
                 .onStart { _uiState.value = MainScreenState.Loading }
                 .catch { _uiState.value = MainScreenState.Error("Error retrieving data from the database") }
                 .collect { rows ->
@@ -35,7 +35,7 @@ class MainScreenViewModel : ViewModel(), KoinComponent {
     }
 
     fun onWatchedToggle(nomineeId: Long, isWatched: Boolean) {
-        repository.updateNomineeWatched(nomineeId, isWatched)
+        repository.updateFilmWatched(nomineeId, isWatched)
     }
 
     fun onNomineeSelected(nomineeId: Long) {

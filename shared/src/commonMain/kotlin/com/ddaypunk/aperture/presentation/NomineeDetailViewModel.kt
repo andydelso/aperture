@@ -19,7 +19,7 @@ sealed class NomineeDetailState {
 }
 
 /**
- * Placeholder details for one nominee, looked up by id. Shows the title for now.
+ * Placeholder details for one nominated film, looked up by film id. Shows the title for now.
  */
 class NomineeDetailViewModel(private val nomineeId: Long) : ViewModel(), KoinComponent {
     private val repository: ApertureDatabaseRepository by inject()
@@ -30,11 +30,11 @@ class NomineeDetailViewModel(private val nomineeId: Long) : ViewModel(), KoinCom
 
     init {
         viewModelScope.launch {
-            repository.getNomineeFlow(nomineeId)
+            repository.getFilmFlow(nomineeId)
                 .catch { _uiState.value = NomineeDetailState.NotFound }
-                .collect { nominee ->
-                    _uiState.value = nominee
-                        ?.let { NomineeDetailState.Ready(title = it.name) }
+                .collect { film ->
+                    _uiState.value = film
+                        ?.let { NomineeDetailState.Ready(title = it.title) }
                         ?: NomineeDetailState.NotFound
                 }
         }

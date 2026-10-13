@@ -1,10 +1,6 @@
+-- Columns must match scripts/oscars/schema.sql, which builds the prebuilt aperture.db
 CREATE TABLE category (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT UNIQUE NOT NULL
+    id INTEGER PRIMARY KEY,
+    canonicalName TEXT UNIQUE NOT NULL, -- stable across renames, e.g. "BEST PICTURE"
+    awardClass TEXT NOT NULL            -- Title, Acting, Directing, Writing, Music, Production, SciTech, Special
 );
-
-INSERT INTO category (name)
-VALUES
-    ("Best Motion Picture of the Year"), -- 1
-    ("Best Adapted Screenplay"), -- 2
-    ("Best Animated Feature Film"); -- 3

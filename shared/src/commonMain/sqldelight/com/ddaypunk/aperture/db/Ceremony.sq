@@ -1,0 +1,6 @@
+-- Columns must match scripts/oscars/schema.sql, which builds the prebuilt aperture.db
+CREATE TABLE ceremony (
+    number INTEGER PRIMARY KEY,      -- 1 for the 1929 ceremony
+    filmYear TEXT NOT NULL,          -- year(s) of the honored films, e.g. "1927/28" or "2025"
+    ceremonyYear INTEGER NOT NULL    -- year the ceremony was held
+);

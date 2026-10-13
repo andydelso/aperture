@@ -1,0 +1,10 @@
+-- Columns must match scripts/oscars/schema.sql, which builds the prebuilt aperture.db
+-- Usually one film per nomination; early acting and writing nominations can cover several
+CREATE TABLE nominationFilm (
+    nominationId INTEGER NOT NULL REFERENCES nomination(id),
+    filmId INTEGER NOT NULL REFERENCES film(id),
+    position INTEGER NOT NULL,
+    PRIMARY KEY (nominationId, filmId)
+);
+
+CREATE INDEX nominationFilm_film ON nominationFilm(filmId);

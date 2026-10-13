@@ -1,0 +1,19 @@
+import kotlin.Boolean;
+
+-- Columns must match scripts/oscars/schema.sql, which builds the prebuilt aperture.db
+CREATE TABLE film (
+    id INTEGER PRIMARY KEY,
+    imdbId TEXT UNIQUE NOT NULL,
+    title TEXT NOT NULL,
+    tmdbId INTEGER,                                -- filled in later from TMDB's /find endpoint
+    watched INTEGER AS Boolean DEFAULT 0 NOT NULL  -- per film, so it shows across every category the film is in
+);
+
+selectFilmById:
+SELECT * FROM film
+WHERE id = ?;
+
+updateFilmWatched:
+UPDATE film
+SET watched = ?
+WHERE id = ?;

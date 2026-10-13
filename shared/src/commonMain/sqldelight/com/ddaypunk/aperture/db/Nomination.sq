@@ -1,0 +1,37 @@
+import kotlin.Boolean;
+
+-- Columns must match scripts/oscars/schema.sql, which builds the prebuilt aperture.db
+CREATE TABLE nomination (
+    id INTEGER PRIMARY KEY,
+    ceremony INTEGER NOT NULL REFERENCES ceremony(number),
+    categoryId INTEGER NOT NULL REFERENCES category(id),
+    categoryName TEXT NOT NULL,      -- the official wording that year, e.g. "OUTSTANDING PICTURE"
+    name TEXT NOT NULL,              -- official nominee text, e.g. "Emma Thomas, Charles Roven and Christopher Nolan, Producers"
+    nominees TEXT NOT NULL,          -- '|' separated names
+    nomineeIds TEXT NOT NULL,        -- '|' separated IMDb name/company ids, '?' when unknown
+    won INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    detail TEXT NOT NULL,            -- '|' separated, e.g. character names or song titles
+    note TEXT
+);
+
+CREATE INDEX nomination_ceremony_category ON nomination(ceremony, categoryId);
+
+-- One row per nomination and film, newest ceremony first, then winners, then by title
+selectNominationsByCategory:
+SELECT
+    ceremony.number AS ceremony,
+    ceremony.ceremonyYear,
+    ceremony.filmYear,
+    nomination.categoryName,
+    film.id AS filmId,
+    film.title,
+    film.watched,
+    nomination.won,
+    nomination.name
+FROM nomination
+JOIN category ON category.id = nomination.categoryId
+JOIN ceremony ON ceremony.number = nomination.ceremony
+JOIN nominationFilm ON nominationFilm.nominationId = nomination.id
+JOIN film ON film.id = nominationFilm.filmId
+WHERE category.canonicalName = :canonicalName
+ORDER BY ceremony.number DESC, nomination.won DESC, film.title;
