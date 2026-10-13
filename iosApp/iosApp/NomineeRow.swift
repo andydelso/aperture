@@ -20,7 +20,9 @@ struct NomineeRow: View {
             .accessibilityHint("Toggles watched")
 
             Text(nominee.title)
-                .foregroundStyle(.primary)
+                // label color stays dark/light per appearance even in a selected row,
+                // unlike the hierarchical .primary style which turns white there
+                .foregroundStyle(Color(uiColor: .label))
             Spacer()
             if nominee.isWinner {
                 WinnerBadge()
