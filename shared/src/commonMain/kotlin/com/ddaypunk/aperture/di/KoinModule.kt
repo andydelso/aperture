@@ -1,6 +1,7 @@
 package com.ddaypunk.aperture.di
 
 import ApertureDatabaseRepository
+import com.ddaypunk.aperture.navigation.Navigator
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -11,7 +12,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     modules(
         repositoryModule,
         databaseDriverModule,
-        databaseModule
+        databaseModule,
+        navigationModule
     )
 }
 
@@ -20,4 +22,5 @@ fun initKoin() = initKoin {}
 
 class KoinHelper : KoinComponent {
     val repository: ApertureDatabaseRepository by inject()
+    val navigator: Navigator by inject()
 }

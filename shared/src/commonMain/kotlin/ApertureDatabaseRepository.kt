@@ -1,5 +1,6 @@
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOneOrNull
 import com.ddaypunk.aperture.db.ApertureDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -18,6 +19,9 @@ class ApertureDatabaseRepository : KoinComponent {
     fun getAllAwardNominees() = awards.selectAllAwardNominees().executeAsList()
     fun getAllAwardNomineesFlow() =
         awards.selectAllAwardNominees().asFlow().mapToList(Dispatchers.IO)
+
+    fun getNomineeFlow(id: Long) =
+        nominees.selectNomineeById(id).asFlow().mapToOneOrNull(Dispatchers.IO)
 
     fun updateNomineeWatched(id: Long, isWatched: Boolean) {
         nominees.updateNomineeWatched(id = id, watched = isWatched)

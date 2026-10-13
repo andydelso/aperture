@@ -1,43 +1,34 @@
 package com.ddaypunk.aperture
 
-import com.ddaypunk.aperture.screen.MainScreen
-import android.os.Bundle
 import android.graphics.Color
+import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
-import androidx.navigation3.ui.NavDisplay
-import com.ddaypunk.aperture.navigation.MainRoute
+import com.ddaypunk.aperture.navigation.ApertureNavDisplay
+import com.ddaypunk.aperture.navigation.Navigator
 import com.ddaypunk.aperture.presentation.MainScreenViewModel
 import com.ddaypunk.aperture.theme.ApertureTheme
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
+    private val navigator: Navigator by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // status bar sits over the red top app bar, so always use light icons
         enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
         super.onCreate(savedInstanceState)
-//        val database = createDatabase(DriverFactory(context = applicationContext))
         val viewmodel = MainScreenViewModel()
         setContent {
             ApertureTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    val backStack = rememberNavBackStack(MainRoute)
-
-                    NavDisplay(
-                        backStack = backStack,
-                        onBack = { backStack.removeLastOrNull() },
-                        entryProvider = entryProvider {
-                            entry<MainRoute> {
-                                MainScreen(viewmodel)
-                            }
-                            // Nominee details is added with shared navigation (#21)
-                        }
+                    ApertureNavDisplay(
+                        navigator = navigator,
+                        mainScreenViewModel = viewmodel
                     )
                 }
             }

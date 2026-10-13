@@ -3,6 +3,7 @@ package com.ddaypunk.aperture.presentation
 import ApertureDatabaseRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ddaypunk.aperture.navigation.Navigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +18,7 @@ import org.koin.core.component.inject
  */
 class MainScreenViewModel : ViewModel(), KoinComponent {
     private val repository: ApertureDatabaseRepository by inject()
+    private val navigator: Navigator by inject()
 
     private val _uiState = MutableStateFlow<MainScreenState>(MainScreenState.Loading)
     val uiState: StateFlow<MainScreenState> = _uiState.asStateFlow()
@@ -34,5 +36,9 @@ class MainScreenViewModel : ViewModel(), KoinComponent {
 
     fun onWatchedToggle(nomineeId: Long, isWatched: Boolean) {
         repository.updateNomineeWatched(nomineeId, isWatched)
+    }
+
+    fun onNomineeSelected(nomineeId: Long) {
+        navigator.openNomineeDetail(nomineeId)
     }
 }

@@ -48,6 +48,7 @@ fun MainScreen(
             is MainScreenState.Ready -> MainScreenReady(
                 state = state.value as MainScreenState.Ready,
                 onWatchedToggle = viewModel::onWatchedToggle,
+                onNomineeSelected = viewModel::onNomineeSelected,
                 contentPadding = innerPadding
             )
             is MainScreenState.Loading -> MainScreenLoading(
@@ -88,6 +89,7 @@ fun MainScreenLoading(modifier: Modifier = Modifier) {
 fun MainScreenReady(
     state: MainScreenState.Ready,
     onWatchedToggle: (nomineeId: Long, isWatched: Boolean) -> Unit,
+    onNomineeSelected: (nomineeId: Long) -> Unit,
     contentPadding: PaddingValues = PaddingValues()
 ) {
     LazyColumn(
@@ -105,7 +107,7 @@ fun MainScreenReady(
             }
             items(season.categories) { category ->
                 ExpandableCard(
-                    state = category.toExpandableCardState(onWatchedToggle),
+                    state = category.toExpandableCardState(onWatchedToggle, onNomineeSelected),
                     accessibilityState = ExpandableCardAccessibilityState(
                         seasonYear = season.year
                     )
@@ -153,7 +155,8 @@ fun MainScreenReadyPreview() {
                         )
                     )
                 ),
-                onWatchedToggle = { _, _ -> }
+                onWatchedToggle = { _, _ -> },
+                onNomineeSelected = {}
             )
         }
     }

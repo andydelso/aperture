@@ -1,5 +1,6 @@
 package com.ddaypunk.aperture.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
@@ -37,7 +38,9 @@ fun CheckableRow(
     with(state) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(end = 16.dp)
+            modifier = Modifier
+                .clickable(onClickLabel = "Show details", onClick = onClick)
+                .padding(end = 16.dp)
         ) {
 
             Checkbox(
@@ -106,6 +109,7 @@ data class CheckableRowState(
     val title: String,
     val isChecked: Boolean,
     val onCheckedChange: () -> Unit,
+    val onClick: () -> Unit = {},
     val image: String? = null,
     val isWinner: Boolean = false
 )

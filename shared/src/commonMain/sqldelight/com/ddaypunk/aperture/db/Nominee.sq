@@ -31,3 +31,6 @@ updateNomineeWatched:
 UPDATE nominee
 SET watched = ? -- Set to 1 for true or 0 for false
 WHERE id = ?;
+selectNomineeById:
+SELECT * FROM nominee
+WHERE id = ?;
