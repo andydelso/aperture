@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 //        val database = createDatabase(DriverFactory(context = applicationContext))
-
+        val viewmodel = MainScreenViewModel()
         setContent {
             val navController = rememberNavController()
 
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.safeDrawingPadding()
             ) {
                 composable("main") {
-                    MainScreen(MainScreenViewModel())
+                    MainScreen(viewmodel)
                 }
                 // Something like the following for tapping a row to see more data
                 // composable("details/{nomineeId}")
