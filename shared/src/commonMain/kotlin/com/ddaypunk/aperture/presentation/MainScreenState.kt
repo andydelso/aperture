@@ -11,7 +11,8 @@ sealed class MainScreenState {
 }
 
 /**
- * One awards season, e.g. 2024
+ * One awards season (ceremony)
+ * @param year display label with the ceremony year and number, e.g. "2026 · 98th"
  */
 data class SeasonUiModel(
     val year: String,
@@ -26,6 +27,9 @@ data class CategoryUiModel(
     val nominees: List<NomineeUiModel>
 )
 
+/**
+ * @param id the film id, used for the watched toggle and detail navigation
+ */
 data class NomineeUiModel(
     val id: Long,
     val title: String,

@@ -7,23 +7,24 @@ import kotlinx.coroutines.IO
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+private const val BEST_PICTURE = "BEST PICTURE"
+
 /**
  * Repository leveraging the platform provided database instance
  * Wraps queries with kotlin functions for ease of use
  */
 class ApertureDatabaseRepository : KoinComponent {
     private val database: ApertureDatabase by inject()
-    private val nominees = database.nomineeQueries
-    private val awards = database.awardNomineeQueries
+    private val films = database.filmQueries
+    private val nominations = database.nominationQueries
 
-    fun getAllAwardNominees() = awards.selectAllAwardNominees().executeAsList()
-    fun getAllAwardNomineesFlow() =
-        awards.selectAllAwardNominees().asFlow().mapToList(Dispatchers.IO)
+    fun getBestPictureNominationsFlow() =
+        nominations.selectNominationsByCategory(canonicalName = BEST_PICTURE).asFlow().mapToList(Dispatchers.IO)
 
-    fun getNomineeFlow(id: Long) =
-        nominees.selectNomineeById(id).asFlow().mapToOneOrNull(Dispatchers.IO)
+    fun getFilmFlow(id: Long) =
+        films.selectFilmById(id).asFlow().mapToOneOrNull(Dispatchers.IO)
 
-    fun updateNomineeWatched(id: Long, isWatched: Boolean) {
-        nominees.updateNomineeWatched(id = id, watched = isWatched)
+    fun updateFilmWatched(id: Long, isWatched: Boolean) {
+        films.updateFilmWatched(watched = isWatched, id = id)
     }
 }

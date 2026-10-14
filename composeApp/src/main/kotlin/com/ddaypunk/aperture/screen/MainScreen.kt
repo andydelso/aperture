@@ -101,11 +101,14 @@ fun MainScreenReady(
         verticalArrangement = Arrangement
             .spacedBy(8.dp)
     ) {
-        state.seasons.forEach { season ->
-            stickyHeader {
+        state.seasons.forEachIndexed { index, season ->
+            stickyHeader(key = season.year) {
                 SectionHeader(state = season.toSectionHeaderState())
             }
-            items(season.categories) { category ->
+            items(
+                items = season.categories,
+                key = { "${it.title}/$index" }
+            ) { category ->
                 ExpandableCard(
                     state = category.toExpandableCardState(onWatchedToggle, onNomineeSelected),
                     accessibilityState = ExpandableCardAccessibilityState(
