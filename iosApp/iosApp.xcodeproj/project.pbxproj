@@ -3,36 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		60A533992B740B3A000B1917 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A533982B740B3A000B1917 /* ContentViewModel.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		C32523E654F7AE3D5A36B46C /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39C450314E083B730780DE /* AppNavigation.swift */; };
 		32FBEF6A977A1A330B14D35B /* NomineeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD48CF3DADA4456749AFEF50 /* NomineeDetailView.swift */; };
-		9A37AF638DC5BEE568EB51B0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBDCA0DD55F00BE8AE9879 /* Theme.swift */; };
+		60A533992B740B3A000B1917 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A533982B740B3A000B1917 /* ContentViewModel.swift */; };
 		6A7625758348A4DBAAE727AE /* NomineeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC63106C1C06BBB326A04D1 /* NomineeRow.swift */; };
+		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		9A37AF638DC5BEE568EB51B0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBDCA0DD55F00BE8AE9879 /* Theme.swift */; };
 		B1F2E3D4C5B6A7980F1E2D3C /* aperture.db in Resources */ = {isa = PBXBuildFile; fileRef = A9E7D0C1B2A3F4E5D6C7B8A9 /* aperture.db */; };
+		C32523E654F7AE3D5A36B46C /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C39C450314E083B730780DE /* AppNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		60A533982B740B3A000B1917 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		7555FF7B242A565900829871 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = .app; path = Aperture.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7C39C450314E083B730780DE /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
-		CD48CF3DADA4456749AFEF50 /* NomineeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomineeDetailView.swift; sourceTree = "<group>"; };
-		6AFBDCA0DD55F00BE8AE9879 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		5FC63106C1C06BBB326A04D1 /* NomineeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomineeRow.swift; sourceTree = "<group>"; };
+		60A533982B740B3A000B1917 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		6AFBDCA0DD55F00BE8AE9879 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7555FF7B242A565900829871 /* Aperture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aperture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		7C39C450314E083B730780DE /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
 		A9E7D0C1B2A3F4E5D6C7B8A9 /* aperture.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = aperture.db; path = ../composeApp/src/main/assets/aperture.db; sourceTree = SOURCE_ROOT; };
+		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		CD48CF3DADA4456749AFEF50 /* NomineeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomineeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -65,7 +65,7 @@
 		7555FF7C242A565900829871 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF7B242A565900829871 /* .app */,
+				7555FF7B242A565900829871 /* Aperture.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			);
 			name = iosApp;
 			productName = iosApp;
-			productReference = 7555FF7B242A565900829871 /* .app */;
+			productReference = 7555FF7B242A565900829871 /* Aperture.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
